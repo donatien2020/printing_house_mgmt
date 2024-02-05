@@ -1,0 +1,9 @@
+{
+  "printingApp": {
+    "ClientTypes": {
+      "null": "",
+      "COMPANY": "COMPANY",
+      "INDIVIDUAL": "INDIVIDUAL"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "printingApp": {
+    "pOrganization": {
+      "home": {
+        "title": "Organizations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Organization",
+        "createOrEditLabel": "Create or edit Organization",
+        "notFound": "No Organizations found"
+      },
+      "created": "A new Organization is created with identifier {{ param }}",
+      "updated": "Organization is updated with identifier {{ param }}",
+      "deleted": "Organization is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Organization {{ id }}?"
+      },
+      "detail": {
+        "title": "Organization"
+      },
+      "id": "ID",
+      "officeAddress": "Office Address",
+      "description": "Description",
+      "profileID": "Profile ID",
+      "companyType": "Company Type",
+      "status": "Status",
+      "divisions": "Divisions",
+      "invoices": "Invoices",
+      "childreen": "Childreen",
+      "company": "Company",
+      "officeLocation": "Office Location",
+      "parent": "Parent"
+    }
+  }
+}

@@ -1,0 +1,194 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-client-heading" data-cy="ClientCreateUpdateHeading" jhiTranslate="printingApp.client.home.createOrEditLabel">
+        Create or edit a Client
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.client.clientType" for="field_clientType">Client Type</label>
+          <select class="form-control" name="clientType" formControlName="clientType" id="field_clientType" data-cy="clientType">
+            <option [ngValue]="null">{{ 'printingApp.ClientTypes.null' | translate }}</option>
+            <option *ngFor="let clientTypes of clientTypesValues" [value]="clientTypes">
+              {{ 'printingApp.ClientTypes.' + clientTypes | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('clientType')!.invalid && (editForm.get('clientType')!.dirty || editForm.get('clientType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('clientType')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.client.engagementMode" for="field_engagementMode">Engagement Mode</label>
+          <select
+            class="form-control"
+            name="engagementMode"
+            formControlName="engagementMode"
+            id="field_engagementMode"
+            data-cy="engagementMode"
+          >
+            <option [ngValue]="null">{{ 'printingApp.EngagementModes.null' | translate }}</option>
+            <option *ngFor="let engagementModes of engagementModesValues" [value]="engagementModes">
+              {{ 'printingApp.EngagementModes.' + engagementModes | translate }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              editForm.get('engagementMode')!.invalid && (editForm.get('engagementMode')!.dirty || editForm.get('engagementMode')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('engagementMode')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.client.address" for="field_address">Address</label>
+          <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.client.currentContractId" for="field_currentContractId"
+            >Current Contract Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="currentContractId"
+            id="field_currentContractId"
+            data-cy="currentContractId"
+            formControlName="currentContractId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.client.contactPhoneNumber" for="field_contactPhoneNumber"
+            >Contact Phone Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="contactPhoneNumber"
+            id="field_contactPhoneNumber"
+            data-cy="contactPhoneNumber"
+            formControlName="contactPhoneNumber"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.client.organizationId" for="field_organizationId">Organization Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="organizationId"
+            id="field_organizationId"
+            data-cy="organizationId"
+            formControlName="organizationId"
+          />
+          <div
+            *ngIf="
+              editForm.get('organizationId')!.invalid && (editForm.get('organizationId')!.dirty || editForm.get('organizationId')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('organizationId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('organizationId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.client.person" for="field_person">Person</label>
+          <select
+            class="form-control"
+            id="field_person"
+            data-cy="person"
+            name="person"
+            formControlName="person"
+            [compareWith]="comparePerson"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="personOption" *ngFor="let personOption of peopleSharedCollection">{{ personOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.client.company" for="field_company">Company</label>
+          <select
+            class="form-control"
+            id="field_company"
+            data-cy="company"
+            name="company"
+            formControlName="company"
+            [compareWith]="compareCompany"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="companyOption" *ngFor="let companyOption of companiesSharedCollection">{{ companyOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.client.residenceLocation" for="field_residenceLocation"
+            >Residence Location</label
+          >
+          <select
+            class="form-control"
+            id="field_residenceLocation"
+            data-cy="residenceLocation"
+            name="residenceLocation"
+            formControlName="residenceLocation"
+            [compareWith]="compareLocation"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="locationOption" *ngFor="let locationOption of locationsSharedCollection">{{ locationOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

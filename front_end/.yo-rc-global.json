@@ -1,0 +1,8 @@
+{
+  "generator-jhipster:7.9.4": {
+    "promptValues": {
+      "packageName": "org.nta.idc.donatien",
+      "nativeLanguage": "en"
+    }
+  }
+}

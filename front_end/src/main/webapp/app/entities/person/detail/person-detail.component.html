@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="person">
+      <h2 data-cy="personDetailsHeading"><span jhiTranslate="printingApp.person.detail.title">Person</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ person.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.person.nid">Nid</span></dt>
+        <dd>
+          <span>{{ person.nid }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.person.docType">Doc Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.DocumentTypes.' + person.docType }}">{{ person.docType }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.person.firstName">First Name</span></dt>
+        <dd>
+          <span>{{ person.firstName }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.person.lastName">Last Name</span></dt>
+        <dd>
+          <span>{{ person.lastName }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.person.gender">Gender</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.Genders.' + person.gender }}">{{ person.gender }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.person.birthDate">Birth Date</span></dt>
+        <dd>
+          <span>{{ person.birthDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.person.birthAddress">Birth Address</span></dt>
+        <dd>
+          <span>{{ person.birthAddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.person.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.Status.' + person.status }}">{{ person.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.person.birthLocation">Birth Location</span></dt>
+        <dd>
+          <div *ngIf="person.birthLocation">
+            <a [routerLink]="['/location', person.birthLocation.id, 'view']">{{ person.birthLocation.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/person', person.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

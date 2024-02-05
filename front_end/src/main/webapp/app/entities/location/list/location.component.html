@@ -1,0 +1,166 @@
+<div>
+  <h2 id="page-heading" data-cy="LocationHeading">
+    <span jhiTranslate="printingApp.location.home.title">Locations</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="printingApp.location.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-location"
+        [routerLink]="['/location/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="printingApp.location.home.createLabel"> Create a new Location </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="locations?.length === 0">
+    <span jhiTranslate="printingApp.location.home.notFound">No Locations found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="locations && locations.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+         <!-- <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>-->
+          <th scope="col" jhiSortBy="code">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.location.code">Code</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="name">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.location.name">Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.location.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdOn">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.location.createdOn">Created On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdById">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.location.createdById">Created By Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdByUsername">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.location.createdByUsername">Created By Username</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedById">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.location.updatedById">Updated By Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedByUsername">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.location.updatedByUsername">Updated By Username</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedOn">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.location.updatedOn">Updated On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="parent.id">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.location.parent">Parent</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="level.id">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.location.level">Level</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let location of locations; trackBy: trackId" data-cy="entityTable">
+         <!-- <td>
+            <a [routerLink]="['/location', location.id, 'view']">{{ location.id }}</a>
+          </td>-->
+          <td>{{ location.code }}</td>
+          <td>{{ location.name }}</td>
+          <td>{{ location.description }}</td>
+          <td>{{ location.createdOn | formatMediumDatetime }}</td>
+          <td>{{ location.createdById }}</td>
+          <td>{{ location.createdByUsername }}</td>
+          <td>{{ location.updatedById }}</td>
+          <td>{{ location.updatedByUsername }}</td>
+          <td>{{ location.updatedOn | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="location.parent">
+              <a [routerLink]="['/location', location.parent.id, 'view']">{{ location.parent.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="location.level">
+              <a [routerLink]="['/location-level', location.level.id, 'view']">{{ location.level.name }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/location', location.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <!--<button
+                type="submit"
+                [routerLink]="['/location', location.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(location)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>-->
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

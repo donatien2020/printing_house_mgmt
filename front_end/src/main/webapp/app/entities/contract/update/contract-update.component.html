@@ -1,0 +1,219 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-contract-heading" data-cy="ContractCreateUpdateHeading" jhiTranslate="printingApp.contract.home.createOrEditLabel">
+        Create or edit a Contract
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <!--<label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>-->
+          <input type="number" class="form-control" *ngIf="false" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.contract.contractType" for="field_contractType">Contract Type</label>
+          <select class="form-control" name="contractType" formControlName="contractType" id="field_contractType" data-cy="contractType">
+            <option [ngValue]="null">{{ 'printingApp.ContractTypes.null' | translate }}</option>
+            <option *ngFor="let contractTypes of contractTypesValues" [value]="contractTypes">
+              {{ 'printingApp.ContractTypes.' + contractTypes | translate }}
+            </option>
+          </select>
+          <div
+            *ngIf="editForm.get('contractType')!.invalid && (editForm.get('contractType')!.dirty || editForm.get('contractType')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('contractType')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.contract.contractNumber" for="field_contractNumber">Contract Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="contractNumber"
+            id="field_contractNumber"
+            data-cy="contractNumber"
+            formControlName="contractNumber"
+          />
+          <div
+            *ngIf="
+              editForm.get('contractNumber')!.invalid && (editForm.get('contractNumber')!.dirty || editForm.get('contractNumber')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('contractNumber')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.contract.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.contract.validFrom" for="field_validFrom">Valid From</label>
+          <div class="d-flex">
+            <input
+              id="field_validFrom"
+              data-cy="validFrom"
+              type="datetime-local"
+              class="form-control"
+              name="validFrom"
+              formControlName="validFrom"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.contract.validTo" for="field_validTo">Valid To</label>
+          <div class="d-flex">
+            <input
+              id="field_validTo"
+              data-cy="validTo"
+              type="datetime-local"
+              class="form-control"
+              name="validTo"
+              formControlName="validTo"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.contract.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'printingApp.Status.null' | translate }}</option>
+            <option *ngFor="let status of statusValues" [value]="status">{{ 'printingApp.Status.' + status | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('status')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.contract.currentAttachmentId" for="field_currentAttachmentId"
+            >Current Attachment Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="currentAttachmentId"
+            id="field_currentAttachmentId"
+            data-cy="currentAttachmentId"
+            formControlName="currentAttachmentId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.contract.ownerId" for="field_ownerId">Owner Id</label>
+          <input type="number" class="form-control" name="ownerId" id="field_ownerId" data-cy="ownerId" formControlName="ownerId" />
+          <div *ngIf="editForm.get('ownerId')!.invalid && (editForm.get('ownerId')!.dirty || editForm.get('ownerId')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('ownerId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('ownerId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.contract.ownerType" for="field_ownerType">Owner Type</label>
+          <select class="form-control" name="ownerType" formControlName="ownerType" id="field_ownerType" data-cy="ownerType">
+            <option [ngValue]="null">{{ 'printingApp.ContractOwnerTypes.null' | translate }}</option>
+            <option *ngFor="let contractOwnerTypes of contractOwnerTypesValues" [value]="contractOwnerTypes">
+              {{ 'printingApp.ContractOwnerTypes.' + contractOwnerTypes | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('ownerType')!.invalid && (editForm.get('ownerType')!.dirty || editForm.get('ownerType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('ownerType')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.contract.acquiringStatus" for="field_acquiringStatus">Acquiring Status</label>
+          <select
+            class="form-control"
+            name="acquiringStatus"
+            formControlName="acquiringStatus"
+            id="field_acquiringStatus"
+            data-cy="acquiringStatus"
+          >
+            <option [ngValue]="null">{{ 'printingApp.ContractAcquiringStatuses.null' | translate }}</option>
+            <option *ngFor="let contractAcquiringStatuses of contractAcquiringStatusesValues" [value]="contractAcquiringStatuses">
+              {{ 'printingApp.ContractAcquiringStatuses.' + contractAcquiringStatuses | translate }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              editForm.get('acquiringStatus')!.invalid &&
+              (editForm.get('acquiringStatus')!.dirty || editForm.get('acquiringStatus')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('acquiringStatus')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

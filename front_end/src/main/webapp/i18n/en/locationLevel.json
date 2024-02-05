@@ -1,0 +1,32 @@
+{
+  "printingApp": {
+    "locationLevel": {
+      "home": {
+        "title": "Location Levels",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Location Level",
+        "createOrEditLabel": "Create or edit a Location Level",
+        "notFound": "No Location Levels found"
+      },
+      "created": "A new Location Level is created with identifier {{ param }}",
+      "updated": "A Location Level is updated with identifier {{ param }}",
+      "deleted": "A Location Level is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Location Level {{ id }}?"
+      },
+      "detail": {
+        "title": "Location Level"
+      },
+      "id": "ID",
+      "code": "Code",
+      "name": "Name",
+      "createdOn": "Created On",
+      "createdById": "Created By Id",
+      "createdByUsername": "Created By Username",
+      "updatedById": "Updated By Id",
+      "updatedByUsername": "Updated By Username",
+      "updatedOn": "Updated On",
+      "locations": "Locations"
+    }
+  }
+}

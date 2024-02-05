@@ -1,0 +1,27 @@
+{
+  "printingApp": {
+    "pPrivilege": {
+      "home": {
+        "title": "PPrivileges",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau P Privilege",
+        "createOrEditLabel": "Créer ou éditer un P Privilege",
+        "notFound": "Aucun P Privilege trouvé"
+      },
+      "created": "Un nouveau P Privilege a été créé avec l'identifiant {{ param }}",
+      "updated": "Le P Privilege avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le P Privilege avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le P Privilege {{ id }} ?"
+      },
+      "detail": {
+        "title": "P Privilege"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "status": "Status",
+      "roles": "Roles"
+    }
+  }
+}

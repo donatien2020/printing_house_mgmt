@@ -1,0 +1,30 @@
+{
+  "printingApp": {
+    "supplier": {
+      "home": {
+        "title": "Suppliers",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Supplier",
+        "createOrEditLabel": "Créer ou éditer un Supplier",
+        "notFound": "Aucun Supplier trouvé"
+      },
+      "created": "Un nouveau Supplier a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Supplier avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Supplier avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Supplier {{ id }} ?"
+      },
+      "detail": {
+        "title": "Supplier"
+      },
+      "id": "ID",
+      "address": "Address",
+      "phoneNumber": "Phone Number",
+      "description": "Description",
+      "specialization": "Specialization",
+      "status": "Status",
+      "debtors": "Debtors",
+      "company": "Company"
+    }
+  }
+}

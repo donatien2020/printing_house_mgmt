@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="client">
+      <h2 data-cy="clientDetailsHeading"><span jhiTranslate="printingApp.client.detail.title">Client</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ client.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.client.clientType">Client Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.ClientTypes.' + client.clientType }}">{{ client.clientType }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.client.engagementMode">Engagement Mode</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.EngagementModes.' + client.engagementMode }}">{{ client.engagementMode }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.client.address">Address</span></dt>
+        <dd>
+          <span>{{ client.address }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.client.currentContractId">Current Contract Id</span></dt>
+        <dd>
+          <span>{{ client.currentContractId }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.client.contactPhoneNumber">Contact Phone Number</span></dt>
+        <dd>
+          <span>{{ client.contactPhoneNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.client.organizationId">Organization Id</span></dt>
+        <dd>
+          <span>{{ client.organizationId }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.client.person">Person</span></dt>
+        <dd>
+          <div *ngIf="client.person">
+            <a [routerLink]="['/person', client.person.id, 'view']">{{ client.person.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="printingApp.client.company">Company</span></dt>
+        <dd>
+          <div *ngIf="client.company">
+            <a [routerLink]="['/company', client.company.id, 'view']">{{ client.company.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="printingApp.client.residenceLocation">Residence Location</span></dt>
+        <dd>
+          <div *ngIf="client.residenceLocation">
+            <a [routerLink]="['/location', client.residenceLocation.id, 'view']">{{ client.residenceLocation.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/client', client.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

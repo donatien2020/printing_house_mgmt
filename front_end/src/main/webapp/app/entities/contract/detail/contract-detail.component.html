@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="contract">
+      <h2 data-cy="contractDetailsHeading"><span jhiTranslate="printingApp.contract.detail.title">Contract</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <!--<dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ contract.id }}</span>
+        </dd>-->
+        <dt><span jhiTranslate="printingApp.contract.contractType">Contract Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.ContractTypes.' + contract.contractType }}">{{ contract.contractType }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.contract.contractNumber">Contract Number</span></dt>
+        <dd>
+          <span>{{ contract.contractNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.contract.description">Description</span></dt>
+        <dd>
+          <span>{{ contract.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.contract.validFrom">Valid From</span></dt>
+        <dd>
+          <span>{{ contract.validFrom | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.contract.validTo">Valid To</span></dt>
+        <dd>
+          <span>{{ contract.validTo | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.contract.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.Status.' + contract.status }}">{{ contract.status }}</span>
+        </dd>
+        <!--<dt><span jhiTranslate="printingApp.contract.currentAttachmentId">Current Attachment Id</span></dt>
+        <dd>
+          <span>{{ contract.currentAttachmentId }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.contract.ownerId">Owner Id</span></dt>
+        <dd>
+          <span>{{ contract.ownerId }}</span>
+        </dd>-->
+        <dt><span jhiTranslate="printingApp.contract.ownerType">Owner Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.ContractOwnerTypes.' + contract.ownerType }}">{{ contract.ownerType }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.contract.acquiringStatus">Acquiring Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.ContractAcquiringStatuses.' + contract.acquiringStatus }}">{{
+            contract.acquiringStatus
+          }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/contract', contract.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

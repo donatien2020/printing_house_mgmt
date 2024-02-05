@@ -1,0 +1,132 @@
+<div>
+  <h2 id="page-heading" data-cy="FinancialClientEngagementHeading">
+    <span jhiTranslate="printingApp.financialClientEngagement.home.title">Financial Client Engagements</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="printingApp.financialClientEngagement.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-financial-client-engagement"
+        [routerLink]="['/financial-client-engagement/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="printingApp.financialClientEngagement.home.createLabel"> Create a new Financial Client Engagement </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="financialClientEngagements?.length === 0">
+    <span jhiTranslate="printingApp.financialClientEngagement.home.notFound">No Financial Client Engagements found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="financialClientEngagements && financialClientEngagements.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="userId">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.financialClientEngagement.userId">User Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="clientId">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.financialClientEngagement.clientId">Client Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="clientNames">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.financialClientEngagement.clientNames">Client Names</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="discussionSummary">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.financialClientEngagement.discussionSummary">Discussion Summary</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="reason">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.financialClientEngagement.reason">Reason</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="conclusion">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.financialClientEngagement.conclusion">Conclusion</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="contractId">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.financialClientEngagement.contractId">Contract Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let financialClientEngagement of financialClientEngagements; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/financial-client-engagement', financialClientEngagement.id, 'view']">{{ financialClientEngagement.id }}</a>
+          </td>
+          <td>{{ financialClientEngagement.userId }}</td>
+          <td>{{ financialClientEngagement.clientId }}</td>
+          <td>{{ financialClientEngagement.clientNames }}</td>
+          <td>{{ financialClientEngagement.discussionSummary }}</td>
+          <td jhiTranslate="{{ 'printingApp.EngagementReasons.' + financialClientEngagement.reason }}">
+            {{ financialClientEngagement.reason }}
+          </td>
+          <td>{{ financialClientEngagement.conclusion }}</td>
+          <td>{{ financialClientEngagement.contractId }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/financial-client-engagement', financialClientEngagement.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/financial-client-engagement', financialClientEngagement.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(financialClientEngagement)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,139 @@
+<div>
+  <h2 id="page-heading" data-cy="LocationLevelHeading">
+    <span jhiTranslate="printingApp.locationLevel.home.title">Location Levels</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="printingApp.locationLevel.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-location-level"
+        [routerLink]="['/location-level/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="printingApp.locationLevel.home.createLabel"> Create a new Location Level </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="locationLevels?.length === 0">
+    <span jhiTranslate="printingApp.locationLevel.home.notFound">No Location Levels found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="locationLevels && locationLevels.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+      <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+        <!--<th scope="col" jhiSortBy="id">
+          <div class="d-flex">
+            <span jhiTranslate="global.field.id">ID</span>
+            <fa-icon class="p-1" icon="sort"></fa-icon>
+          </div>
+        </th>-->
+        <th scope="col" jhiSortBy="code">
+          <div class="d-flex">
+            <span jhiTranslate="printingApp.locationLevel.code">Code</span>
+            <fa-icon class="p-1" icon="sort"></fa-icon>
+          </div>
+        </th>
+        <th scope="col" jhiSortBy="name">
+          <div class="d-flex">
+            <span jhiTranslate="printingApp.locationLevel.name">Name</span>
+            <fa-icon class="p-1" icon="sort"></fa-icon>
+          </div>
+        </th>
+        <th scope="col" jhiSortBy="createdOn">
+          <div class="d-flex">
+            <span jhiTranslate="printingApp.locationLevel.createdOn">Created On</span>
+            <fa-icon class="p-1" icon="sort"></fa-icon>
+          </div>
+        </th>
+        <th scope="col" jhiSortBy="createdById">
+          <div class="d-flex">
+            <span jhiTranslate="printingApp.locationLevel.createdById">Created By Id</span>
+            <fa-icon class="p-1" icon="sort"></fa-icon>
+          </div>
+        </th>
+        <th scope="col" jhiSortBy="createdByUsername">
+          <div class="d-flex">
+            <span jhiTranslate="printingApp.locationLevel.createdByUsername">Created By Username</span>
+            <fa-icon class="p-1" icon="sort"></fa-icon>
+          </div>
+        </th>
+        <th scope="col" jhiSortBy="updatedById">
+          <div class="d-flex">
+            <span jhiTranslate="printingApp.locationLevel.updatedById">Updated By Id</span>
+            <fa-icon class="p-1" icon="sort"></fa-icon>
+          </div>
+        </th>
+        <th scope="col" jhiSortBy="updatedByUsername">
+          <div class="d-flex">
+            <span jhiTranslate="printingApp.locationLevel.updatedByUsername">Updated By Username</span>
+            <fa-icon class="p-1" icon="sort"></fa-icon>
+          </div>
+        </th>
+        <th scope="col" jhiSortBy="updatedOn">
+          <div class="d-flex">
+            <span jhiTranslate="printingApp.locationLevel.updatedOn">Updated On</span>
+            <fa-icon class="p-1" icon="sort"></fa-icon>
+          </div>
+        </th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let locationLevel of locationLevels; trackBy: trackId" data-cy="entityTable">
+        <!--<td>
+          <a [routerLink]="['/location-level', locationLevel.id, 'view']">{{ locationLevel.id }}</a>
+        </td>-->
+        <td>{{ locationLevel.code }}</td>
+        <td>{{ locationLevel.name }}</td>
+        <td>{{ locationLevel.createdOn | formatMediumDatetime }}</td>
+        <td>{{ locationLevel.createdById }}</td>
+        <td>{{ locationLevel.createdByUsername }}</td>
+        <td>{{ locationLevel.updatedById }}</td>
+        <td>{{ locationLevel.updatedByUsername }}</td>
+        <td>{{ locationLevel.updatedOn | formatMediumDatetime }}</td>
+        <td class="text-end">
+          <div class="btn-group">
+            <button
+              type="submit"
+              [routerLink]="['/location-level', locationLevel.id, 'view']"
+              class="btn btn-info btn-sm"
+              data-cy="entityDetailsButton"
+            >
+              <fa-icon icon="eye"></fa-icon>
+              <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+            </button>
+            <!--
+                          <button
+                            type="submit"
+                            [routerLink]="['/location-level', locationLevel.id, 'edit']"
+                            class="btn btn-primary btn-sm"
+                            data-cy="entityEditButton"
+                          >
+                            <fa-icon icon="pencil-alt"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                          </button>
+
+                          <button type="submit" (click)="delete(locationLevel)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                            <fa-icon icon="times"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                          </button>
+
+                -->
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

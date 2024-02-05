@@ -1,0 +1,191 @@
+<div>
+  <h2 id="page-heading" data-cy="InvoiceHeading">
+    <span jhiTranslate="printingApp.invoice.home.title">Invoices</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="printingApp.invoice.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-invoice"
+        [routerLink]="['/invoice/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="printingApp.invoice.home.createLabel"> Create a new Invoice </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="invoices?.length === 0">
+    <span jhiTranslate="printingApp.invoice.home.notFound">No Invoices found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="invoices && invoices.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="invoiceNumber">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.invoice.invoiceNumber">Invoice Number</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="totalJobCards">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.invoice.totalJobCards">Total Job Cards</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="totalCost">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.invoice.totalCost">Total Cost</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="paymentMode">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.invoice.paymentMode">Payment Mode</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="paymentType">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.invoice.paymentType">Payment Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="invoiceType">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.invoice.invoiceType">Invoice Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.invoice.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="receptionOrderId">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.invoice.receptionOrderId">Reception Order Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="invoicedOn">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.invoice.invoicedOn">Invoiced On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dueOn">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.invoice.dueOn">Due On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fromOrganizationId">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.invoice.fromOrganizationId">From Organization Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="debtor.id">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.invoice.debtor">Debtor</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="invoiceToClient.id">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.invoice.invoiceToClient">Invoice To Client</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="toOrganization.id">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.invoice.toOrganization">To Organization</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let invoice of invoices; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/invoice', invoice.id, 'view']">{{ invoice.id }}</a>
+          </td>
+          <td>{{ invoice.invoiceNumber }}</td>
+          <td>{{ invoice.totalJobCards }}</td>
+          <td>{{ invoice.totalCost }}</td>
+          <td jhiTranslate="{{ 'printingApp.InvoicePaymentModes.' + invoice.paymentMode }}">{{ invoice.paymentMode }}</td>
+          <td jhiTranslate="{{ 'printingApp.PaymentTypes.' + invoice.paymentType }}">{{ invoice.paymentType }}</td>
+          <td jhiTranslate="{{ 'printingApp.InvoiceTypes.' + invoice.invoiceType }}">{{ invoice.invoiceType }}</td>
+          <td jhiTranslate="{{ 'printingApp.InvoicingStatuses.' + invoice.status }}">{{ invoice.status }}</td>
+          <td>{{ invoice.receptionOrderId }}</td>
+          <td>{{ invoice.invoicedOn | formatMediumDatetime }}</td>
+          <td>{{ invoice.dueOn | formatMediumDatetime }}</td>
+          <td>{{ invoice.fromOrganizationId }}</td>
+          <td>
+            <div *ngIf="invoice.debtor">
+              <a [routerLink]="['/debtor', invoice.debtor.id, 'view']">{{ invoice.debtor.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="invoice.invoiceToClient">
+              <a [routerLink]="['/client', invoice.invoiceToClient.id, 'view']">{{ invoice.invoiceToClient.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="invoice.toOrganization">
+              <a [routerLink]="['/p-organization', invoice.toOrganization.id, 'view']">{{ invoice.toOrganization.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/invoice', invoice.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/invoice', invoice.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(invoice)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

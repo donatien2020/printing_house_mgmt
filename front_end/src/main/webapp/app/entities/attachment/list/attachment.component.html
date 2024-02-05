@@ -1,0 +1,137 @@
+<div>
+  <h2 id="page-heading" data-cy="AttachmentHeading">
+    <span jhiTranslate="printingApp.attachment.home.title">Attachments</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="printingApp.attachment.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-attachment"
+        [routerLink]="['/attachment/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="printingApp.attachment.home.createLabel"> Create a new Attachment </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="attachments?.length === 0">
+    <span jhiTranslate="printingApp.attachment.home.notFound">No Attachments found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="attachments && attachments.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+         <!-- <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>-->
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.attachment.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fileName">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.attachment.fileName">File Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="pathToFile">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.attachment.pathToFile">Path To File</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="type">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.attachment.type">Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="extension">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.attachment.extension">Extension</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ownerType">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.attachment.ownerType">Owner Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+         <!-- <th scope="col" jhiSortBy="ownerId">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.attachment.ownerId">Owner Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>-->
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.attachment.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let attachment of attachments; trackBy: trackId" data-cy="entityTable">
+         <!-- <td>
+            <a [routerLink]="['/attachment', attachment.id, 'view']">{{ attachment.id }}</a>
+          </td>-->
+          <td><a [routerLink]="['/attachment', attachment.id, 'view']">{{ attachment.description }}</a></td>
+          <td>{{ attachment.fileName }}</td>
+          <td>{{ attachment.pathToFile }}</td>
+          <td jhiTranslate="{{ 'printingApp.FileTypes.' + attachment.type }}">{{ attachment.type }}</td>
+          <td jhiTranslate="{{ 'printingApp.FileExtensions.' + attachment.extension }}">{{ attachment.extension }}</td>
+          <td jhiTranslate="{{ 'printingApp.FileOwnerTypes.' + attachment.ownerType }}">{{ attachment.ownerType }}</td>
+          <!--<td>{{ attachment.ownerId }}</td>-->
+          <td jhiTranslate="{{ 'printingApp.Status.' + attachment.status }}">{{ attachment.status }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/attachment', attachment.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/attachment', attachment.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(attachment)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

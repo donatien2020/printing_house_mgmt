@@ -1,0 +1,32 @@
+{
+  "printingApp": {
+    "payRollItem": {
+      "home": {
+        "title": "Pay Roll Items",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Pay Roll Item",
+        "createOrEditLabel": "Create or edit a Pay Roll Item",
+        "notFound": "No Pay Roll Items found"
+      },
+      "created": "A new Pay Roll Item is created with identifier {{ param }}",
+      "updated": "A Pay Roll Item is updated with identifier {{ param }}",
+      "deleted": "A Pay Roll Item is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Pay Roll Item {{ id }}?"
+      },
+      "detail": {
+        "title": "Pay Roll Item"
+      },
+      "id": "ID",
+      "divisionId": "Division Id",
+      "empId": "Emp Id",
+      "empNumber": "Emp Number",
+      "netAmount": "Net Amount",
+      "grossAmount": "Gross Amount",
+      "collectionStatus": "Collection Status",
+      "collectionDate": "Collection Date",
+      "computationDate": "Computation Date",
+      "payRoll": "Pay Roll"
+    }
+  }
+}

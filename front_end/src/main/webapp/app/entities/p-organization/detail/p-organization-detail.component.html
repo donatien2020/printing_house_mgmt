@@ -1,0 +1,63 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="pOrganization">
+      <h2 data-cy="pOrganizationDetailsHeading"><span jhiTranslate="printingApp.pOrganization.detail.title">P Organization</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+
+        <dt><span jhiTranslate="printingApp.pOrganization.officeAddress">Office Address</span></dt>
+        <dd>
+          <span>{{ pOrganization.officeAddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.pOrganization.description">Description</span></dt>
+        <dd>
+          <span>{{ pOrganization.description }}</span>
+        </dd>
+        <!--<dt><span jhiTranslate="printingApp.pOrganization.profileID">Profile ID</span></dt>
+        <dd>
+          <span>{{ pOrganization.profileID }}</span>
+        </dd>-->
+        <dt><span jhiTranslate="printingApp.pOrganization.companyType">Company Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.CompanyTypes.' + pOrganization.companyType }}">{{ pOrganization.companyType }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.pOrganization.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.Status.' + pOrganization.status }}">{{ pOrganization.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.pOrganization.company">Company</span></dt>
+        <dd>
+          <div *ngIf="pOrganization.company">
+            <a [routerLink]="['/company', pOrganization.company.id, 'view']">{{ pOrganization.company.companyNames }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="printingApp.pOrganization.officeLocation">Office Location</span></dt>
+        <dd>
+          <div *ngIf="pOrganization.officeLocation">
+            <a [routerLink]="['/location', pOrganization.officeLocation.id, 'view']">{{ pOrganization.officeLocation.name }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="printingApp.pOrganization.parent">Parent</span></dt>
+        <dd>
+          <div *ngIf="pOrganization.parent">
+            <a [routerLink]="['/p-organization', pOrganization.parent.id, 'view']">{{ pOrganization.parent.description }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/p-organization', pOrganization.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

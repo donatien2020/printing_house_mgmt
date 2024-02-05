@@ -1,0 +1,150 @@
+<div>
+  <h2 id="page-heading" data-cy="PayRollItemHeading">
+    <span jhiTranslate="printingApp.payRollItem.home.title">Pay Roll Items</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="printingApp.payRollItem.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-pay-roll-item"
+        [routerLink]="['/pay-roll-item/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="printingApp.payRollItem.home.createLabel"> Create a new Pay Roll Item </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="payRollItems?.length === 0">
+    <span jhiTranslate="printingApp.payRollItem.home.notFound">No Pay Roll Items found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="payRollItems && payRollItems.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <!--<th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>-->
+          <th scope="col" jhiSortBy="divisionId">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.payRollItem.divisionId">Division Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="empId">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.payRollItem.empId">Emp Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="empNumber">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.payRollItem.empNumber">Emp Number</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="netAmount">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.payRollItem.netAmount">Net Amount</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="grossAmount">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.payRollItem.grossAmount">Gross Amount</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="collectionStatus">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.payRollItem.collectionStatus">Collection Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="collectionDate">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.payRollItem.collectionDate">Collection Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="computationDate">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.payRollItem.computationDate">Computation Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="payRoll.id">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.payRollItem.payRoll">Pay Roll</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payRollItem of payRollItems; trackBy: trackId" data-cy="entityTable">
+         <!-- <td>
+            <a [routerLink]="['/pay-roll-item', payRollItem.id, 'view']">{{ payRollItem.id }}</a>
+          </td>-->
+          <td><a [routerLink]="['/pay-roll-item', payRollItem.id, 'view']">{{ payRollItem.divisionId }}</a></td>
+          <td>{{ payRollItem.empId }}</td>
+          <td>{{ payRollItem.empNumber }}</td>
+          <td>{{ payRollItem.netAmount }}</td>
+          <td>{{ payRollItem.grossAmount }}</td>
+          <td jhiTranslate="{{ 'printingApp.SalaryCollectionStatuses.' + payRollItem.collectionStatus }}">
+            {{ payRollItem.collectionStatus }}
+          </td>
+          <td>{{ payRollItem.collectionDate | formatMediumDatetime }}</td>
+          <td>{{ payRollItem.computationDate | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="payRollItem.payRoll">
+              <a [routerLink]="['/pay-roll', payRollItem.payRoll.id, 'view']">{{ payRollItem.payRoll.payFrom }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/pay-roll-item', payRollItem.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/pay-roll-item', payRollItem.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(payRollItem)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="invoiceItem">
+      <h2 data-cy="invoiceItemDetailsHeading"><span jhiTranslate="printingApp.invoiceItem.detail.title">Invoice Item</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ invoiceItem.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoiceItem.itemId">Item Id</span></dt>
+        <dd>
+          <span>{{ invoiceItem.itemId }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoiceItem.invoiceId">Invoice Id</span></dt>
+        <dd>
+          <span>{{ invoiceItem.invoiceId }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoiceItem.itemType">Item Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.InvoiceItemTypes.' + invoiceItem.itemType }}">{{ invoiceItem.itemType }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoiceItem.unitPrice">Unit Price</span></dt>
+        <dd>
+          <span>{{ invoiceItem.unitPrice }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoiceItem.quantity">Quantity</span></dt>
+        <dd>
+          <span>{{ invoiceItem.quantity }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoiceItem.totalCost">Total Cost</span></dt>
+        <dd>
+          <span>{{ invoiceItem.totalCost }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoiceItem.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.Status.' + invoiceItem.status }}">{{ invoiceItem.status }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/invoice-item', invoiceItem.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

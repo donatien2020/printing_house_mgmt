@@ -1,0 +1,132 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-division-heading" data-cy="DivisionCreateUpdateHeading" jhiTranslate="printingApp.division.home.createOrEditLabel">
+        Create or edit a Division
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <!--<label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>-->
+          <input type="number" class="form-control"  *ngIf="false" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.division.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.division.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.division.level" for="field_level">Level</label>
+          <select class="form-control" name="level" formControlName="level" id="field_level" data-cy="level">
+            <option [ngValue]="null">{{ 'printingApp.DivisionLevels.null' | translate }}</option>
+            <option *ngFor="let divisionLevels of divisionLevelsValues" [value]="divisionLevels">
+              {{ 'printingApp.DivisionLevels.' + divisionLevels | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('level')!.invalid && (editForm.get('level')!.dirty || editForm.get('level')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('level')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.division.divisionType" for="field_divisionType">Division Type</label>
+          <select class="form-control" name="divisionType" formControlName="divisionType" id="field_divisionType" data-cy="divisionType">
+            <option [ngValue]="null">{{ 'printingApp.DivisionTypes.null' | translate }}</option>
+            <option *ngFor="let divisionTypes of divisionTypesValues" [value]="divisionTypes">
+              {{ 'printingApp.DivisionTypes.' + divisionTypes | translate }}
+            </option>
+          </select>
+          <div
+            *ngIf="editForm.get('divisionType')!.invalid && (editForm.get('divisionType')!.dirty || editForm.get('divisionType')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('divisionType')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.division.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'printingApp.Status.null' | translate }}</option>
+            <option *ngFor="let status of statusValues" [value]="status">{{ 'printingApp.Status.' + status | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('status')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.division.parent" for="field_parent">Parent</label>
+          <select
+            class="form-control"
+            id="field_parent"
+            data-cy="parent"
+            name="parent"
+            formControlName="parent"
+            [compareWith]="compareDivision"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="divisionOption" *ngFor="let divisionOption of divisionsSharedCollection">{{ divisionOption.name }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.division.organization" for="field_organization">Organization</label>
+          <select
+            class="form-control"
+            id="field_organization"
+            data-cy="organization"
+            name="organization"
+            formControlName="organization"
+            [compareWith]="comparePOrganization"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="pOrganizationOption" *ngFor="let pOrganizationOption of pOrganizationsSharedCollection">
+              {{ pOrganizationOption.description }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

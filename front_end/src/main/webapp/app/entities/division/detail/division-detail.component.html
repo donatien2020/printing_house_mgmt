@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="division">
+      <h2 data-cy="divisionDetailsHeading"><span jhiTranslate="printingApp.division.detail.title">Division</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <!--<dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ division.id }}</span>
+        </dd>-->
+        <dt><span jhiTranslate="printingApp.division.name">Name</span></dt>
+        <dd>
+          <span>{{ division.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.division.description">Description</span></dt>
+        <dd>
+          <span>{{ division.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.division.level">Level</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.DivisionLevels.' + division.level }}">{{ division.level }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.division.divisionType">Division Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.DivisionTypes.' + division.divisionType }}">{{ division.divisionType }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.division.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.Status.' + division.status }}">{{ division.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.division.parent">Parent</span></dt>
+        <dd>
+          <div *ngIf="division.parent">
+            <a [routerLink]="['/division', division.parent.id, 'view']">{{ division.parent.name }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="printingApp.division.organization">Organization</span></dt>
+        <dd>
+          <div *ngIf="division.organization">
+            <a [routerLink]="['/p-organization', division.organization.id, 'view']">{{ division.organization.description }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/division', division.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,122 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-user-division-enrolment-heading"
+        data-cy="UserDivisionEnrolmentCreateUpdateHeading"
+        jhiTranslate="printingApp.userDivisionEnrolment.home.createOrEditLabel"
+      >
+        Create or edit a User Division Enrolment
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.userDivisionEnrolment.startedOn" for="field_startedOn">Started On</label>
+          <div class="d-flex">
+            <input
+              id="field_startedOn"
+              data-cy="startedOn"
+              type="datetime-local"
+              class="form-control"
+              name="startedOn"
+              formControlName="startedOn"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('startedOn')!.invalid && (editForm.get('startedOn')!.dirty || editForm.get('startedOn')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('startedOn')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('startedOn')?.errors?.datetimelocal"
+              jhiTranslate="entity.validation.datetimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.userDivisionEnrolment.endedOn" for="field_endedOn">Ended On</label>
+          <div class="d-flex">
+            <input
+              id="field_endedOn"
+              data-cy="endedOn"
+              type="datetime-local"
+              class="form-control"
+              name="endedOn"
+              formControlName="endedOn"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.userDivisionEnrolment.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'printingApp.EnrollmentStatus.null' | translate }}</option>
+            <option *ngFor="let enrollmentStatus of enrollmentStatusValues" [value]="enrollmentStatus">
+              {{ 'printingApp.EnrollmentStatus.' + enrollmentStatus | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('status')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.userDivisionEnrolment.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="pUserOption" *ngFor="let pUserOption of pUsersSharedCollection">{{ pUserOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.userDivisionEnrolment.division" for="field_division">Division</label>
+          <select
+            class="form-control"
+            id="field_division"
+            data-cy="division"
+            name="division"
+            formControlName="division"
+            [compareWith]="compareDivision"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="divisionOption" *ngFor="let divisionOption of divisionsSharedCollection">{{ divisionOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

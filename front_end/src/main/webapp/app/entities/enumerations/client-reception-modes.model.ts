@@ -1,0 +1,7 @@
+export enum ClientReceptionModes {
+  QUOTATION = 'QUOTATION',
+
+  ORDER_FORM = 'ORDER_FORM',
+
+  LOCAL_PURCHASE_ORDER = 'LOCAL_PURCHASE_ORDER',
+}

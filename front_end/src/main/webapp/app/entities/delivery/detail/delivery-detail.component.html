@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="delivery">
+      <h2 data-cy="deliveryDetailsHeading"><span jhiTranslate="printingApp.delivery.detail.title">Delivery</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <!--<dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ delivery.id }}</span>
+        </dd>-->
+        <dt><span jhiTranslate="printingApp.delivery.order">Order Number</span></dt>
+        <dd>
+          <span>{{ delivery.receiptionOrder?.orderNumber }}</span>
+        </dd>
+        <!--<dt><span jhiTranslate="printingApp.delivery.delivererId">Deliverer Id</span></dt>
+        <dd>
+          <span>{{ delivery.delivererId }}</span>
+        </dd>-->
+        <dt><span jhiTranslate="printingApp.delivery.deliveryNote">Delivery Note</span></dt>
+        <dd>
+          <span>{{ delivery.deliveryNote }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.delivery.receiverClient">Receiver Client</span></dt>
+        <dd>
+          <span>{{ delivery.receiverClientId }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.delivery.attachment">Attachment</span></dt>
+        <dd>
+          <span>{{ delivery.document?.fileName }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.delivery.deliveryDate">Delivery Date</span></dt>
+        <dd>
+          <span>{{ delivery.deliveryDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.delivery.deliveryAddress">Delivery Address</span></dt>
+        <dd>
+          <span>{{ delivery.deliveryAddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.delivery.deliveryLocation">Delivery Location</span></dt>
+        <dd>
+          <span>{{ delivery.location?.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.delivery.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.DeliveryStatuses.' + delivery.status }}">{{ delivery.status }}</span>
+        </dd>
+      </dl>
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+      <button type="button" [routerLink]="['/delivery', delivery.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

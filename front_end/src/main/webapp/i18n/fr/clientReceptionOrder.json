@@ -1,0 +1,38 @@
+{
+  "printingApp": {
+    "clientReceptionOrder": {
+      "home": {
+        "title": "ClientReceptionOrders",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Client Reception Order",
+        "createOrEditLabel": "Créer ou éditer un Client Reception Order",
+        "notFound": "Aucun Client Reception Order trouvé"
+      },
+      "created": "Un nouveau Client Reception Order a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Client Reception Order avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Client Reception Order avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Client Reception Order {{ id }} ?"
+      },
+      "detail": {
+        "title": "Client Reception Order"
+      },
+      "id": "ID",
+      "orderNumber": "Order Number",
+      "divisionId": "Division Id",
+      "receivedOn": "Received On",
+      "receptionMode": "Reception Mode",
+      "jobDescription": "Job Description",
+      "totalCost": "Total Cost",
+      "totalJobCards": "Total Job Cards",
+      "deliveryDate": "Delivery Date",
+      "assignedToDivisionNames": "Assigned To Division Names",
+      "assignedToEmployeeNames": "Assigned To Employee Names",
+      "orderingStatus": "Ordering Status",
+      "invoicingStatus": "Invoicing Status",
+      "jobCards": "Job Cards",
+      "client": "Client",
+      "assignedToEmployee": "Assigned To Employee"
+    }
+  }
+}

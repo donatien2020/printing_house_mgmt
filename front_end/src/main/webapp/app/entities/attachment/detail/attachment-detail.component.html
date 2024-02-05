@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="attachment">
+      <h2 data-cy="attachmentDetailsHeading"><span jhiTranslate="printingApp.attachment.detail.title">Attachment</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+       <!-- <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ attachment.id }}</span>
+        </dd>-->
+        <dt><span jhiTranslate="printingApp.attachment.description">Description</span></dt>
+        <dd>
+          <span>{{ attachment.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.attachment.fileName">File Name</span></dt>
+        <dd>
+          <span>{{ attachment.fileName }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.attachment.pathToFile">Path To File</span></dt>
+        <dd>
+          <span>{{ attachment.pathToFile }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.attachment.type">Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.FileTypes.' + attachment.type }}">{{ attachment.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.attachment.extension">Extension</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.FileExtensions.' + attachment.extension }}">{{ attachment.extension }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.attachment.ownerType">Owner Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.FileOwnerTypes.' + attachment.ownerType }}">{{ attachment.ownerType }}</span>
+        </dd>
+       <!-- <dt><span jhiTranslate="printingApp.attachment.ownerId">Owner Id</span></dt>
+        <dd>
+          <span>{{ attachment.ownerId }}</span>
+        </dd>-->
+        <dt><span jhiTranslate="printingApp.attachment.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.Status.' + attachment.status }}">{{ attachment.status }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/attachment', attachment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

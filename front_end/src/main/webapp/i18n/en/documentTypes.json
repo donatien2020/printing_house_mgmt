@@ -1,0 +1,10 @@
+{
+  "printingApp": {
+    "DocumentTypes": {
+      "null": "",
+      "NID": "NID",
+      "PASSPORT": "PASSPORT",
+      "NA": "NA"
+    }
+  }
+}

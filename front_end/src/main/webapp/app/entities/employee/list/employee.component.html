@@ -1,0 +1,205 @@
+<div>
+  <h2 id="page-heading" data-cy="EmployeeHeading">
+    <span jhiTranslate="printingApp.employee.home.title">Employees</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="printingApp.employee.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-employee"
+        [routerLink]="['/employee/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="printingApp.employee.home.createLabel"> Create a new Employee </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="employees?.length === 0">
+    <span jhiTranslate="printingApp.employee.home.notFound">No Employees found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="employees && employees.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <!--<th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>-->
+          <th scope="col" jhiSortBy="empNumber">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.employee.empNumber">Emp Number</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.employee.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="phoneNumber">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.employee.phoneNumber">Phone Number</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="email">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.employee.email">Email</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.employee.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="startedOn">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.employee.startedOn">Started On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="terminatedOn">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.employee.terminatedOn">Terminated On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="empType">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.employee.empType">Emp Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="basePayment">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.employee.basePayment">Base Payment</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="netPayment">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.employee.netPayment">Net Payment</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="grossPayment">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.employee.grossPayment">Gross Payment</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="paymentPeriod">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.employee.paymentPeriod">Payment Period</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="division.id">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.employee.division">Division</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="person.id">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.employee.person">Person</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees; trackBy: trackId" data-cy="entityTable">
+          <!--<td>
+            <a [routerLink]="['/employee', employee.id, 'view']">{{ employee.id }}</a>
+          </td>-->
+          <td><a [routerLink]="['/employee', employee.id, 'view']">{{ employee.empNumber }}</a></td>
+          <td>{{ employee.description }}</td>
+          <td>{{ employee.phoneNumber }}</td>
+          <td>{{ employee.email }}</td>
+          <td jhiTranslate="{{ 'printingApp.EmploymentStatuses.' + employee.status }}">{{ employee.status }}</td>
+          <td>{{ employee.startedOn | formatMediumDatetime }}</td>
+          <td>{{ employee.terminatedOn | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'printingApp.EmploymentTypes.' + employee.empType }}">{{ employee.empType }}</td>
+          <td>{{ employee.basePayment }}</td>
+          <td>{{ employee.netPayment }}</td>
+          <td>{{ employee.grossPayment }}</td>
+          <td jhiTranslate="{{ 'printingApp.PaymentPeriods.' + employee.paymentPeriod }}">{{ employee.paymentPeriod }}</td>
+          <td>
+            <div *ngIf="employee.division">
+              <a [routerLink]="['/division', employee.division.id, 'view']">{{ employee.division.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="employee.person">
+              <a [routerLink]="['/person', employee.person.id, 'view']">{{ employee.person.firstName }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/employee', employee.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/employee', employee.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(employee)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="employees && employees.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

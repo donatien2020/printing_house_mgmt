@@ -1,0 +1,12 @@
+{
+  "printingApp": {
+    "DivisionTypes": {
+      "null": "",
+      "ADMINISTRATION": "ADMINISTRATION",
+      "PRODUCTION": "PRODUCTION",
+      "FINANCE": "FINANCE",
+      "DELIVERY": "DELIVERY",
+      "RECOVERY": "RECOVERY"
+    }
+  }
+}

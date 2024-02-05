@@ -1,0 +1,13 @@
+{
+  "printingApp": {
+    "InvoicingStatuses": {
+      "null": "",
+      "INITIAL": "INITIAL",
+      "CANCELED": "CANCELED",
+      "INVOICED": "INVOICED",
+      "PAID": "PAID",
+      "REVERSED": "REVERSED",
+      "REFUNDED": "REFUNDED"
+    }
+  }
+}

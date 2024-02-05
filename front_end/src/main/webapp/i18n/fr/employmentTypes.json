@@ -1,0 +1,9 @@
+{
+  "printingApp": {
+    "EmploymentTypes": {
+      "null": "",
+      "CONTRACTUAL": "CONTRACTUAL",
+      "CASUAL": "CASUAL"
+    }
+  }
+}

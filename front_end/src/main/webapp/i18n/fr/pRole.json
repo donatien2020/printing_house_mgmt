@@ -1,0 +1,28 @@
+{
+  "printingApp": {
+    "pRole": {
+      "home": {
+        "title": "PRoles",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau P Role",
+        "createOrEditLabel": "Créer ou éditer un P Role",
+        "notFound": "Aucun P Role trouvé"
+      },
+      "created": "Un nouveau P Role a été créé avec l'identifiant {{ param }}",
+      "updated": "Le P Role avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le P Role avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le P Role {{ id }} ?"
+      },
+      "detail": {
+        "title": "P Role"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "status": "Status",
+      "privileges": "Privileges",
+      "users": "Users"
+    }
+  }
+}

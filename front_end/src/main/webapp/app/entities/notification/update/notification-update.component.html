@@ -1,0 +1,237 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-notification-heading"
+        data-cy="NotificationCreateUpdateHeading"
+        jhiTranslate="printingApp.notification.home.createOrEditLabel"
+      >
+        Create or edit a Notification
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.notification.notificationType" for="field_notificationType"
+            >Notification Type</label
+          >
+          <select
+            class="form-control"
+            name="notificationType"
+            formControlName="notificationType"
+            id="field_notificationType"
+            data-cy="notificationType"
+          >
+            <option [ngValue]="null">{{ 'printingApp.NotificationTypes.null' | translate }}</option>
+            <option *ngFor="let notificationTypes of notificationTypesValues" [value]="notificationTypes">
+              {{ 'printingApp.NotificationTypes.' + notificationTypes | translate }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              editForm.get('notificationType')!.invalid &&
+              (editForm.get('notificationType')!.dirty || editForm.get('notificationType')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('notificationType')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.notification.content" for="field_content">Content</label>
+          <input type="text" class="form-control" name="content" id="field_content" data-cy="content" formControlName="content" />
+          <div *ngIf="editForm.get('content')!.invalid && (editForm.get('content')!.dirty || editForm.get('content')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('content')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.notification.sentAt" for="field_sentAt">Sent At</label>
+          <div class="d-flex">
+            <input
+              id="field_sentAt"
+              data-cy="sentAt"
+              type="datetime-local"
+              class="form-control"
+              name="sentAt"
+              formControlName="sentAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.notification.product" for="field_product">Product</label>
+          <select class="form-control" name="product" formControlName="product" id="field_product" data-cy="product">
+            <option [ngValue]="null">{{ 'printingApp.NotificationProducts.null' | translate }}</option>
+            <option *ngFor="let notificationProducts of notificationProductsValues" [value]="notificationProducts">
+              {{ 'printingApp.NotificationProducts.' + notificationProducts | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('product')!.invalid && (editForm.get('product')!.dirty || editForm.get('product')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('product')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.notification.receiverId" for="field_receiverId">Receiver Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="receiverId"
+            id="field_receiverId"
+            data-cy="receiverId"
+            formControlName="receiverId"
+          />
+          <div *ngIf="editForm.get('receiverId')!.invalid && (editForm.get('receiverId')!.dirty || editForm.get('receiverId')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('receiverId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('receiverId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.notification.receiverNames" for="field_receiverNames">Receiver Names</label>
+          <input
+            type="number"
+            class="form-control"
+            name="receiverNames"
+            id="field_receiverNames"
+            data-cy="receiverNames"
+            formControlName="receiverNames"
+          />
+          <div
+            *ngIf="
+              editForm.get('receiverNames')!.invalid && (editForm.get('receiverNames')!.dirty || editForm.get('receiverNames')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('receiverNames')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('receiverNames')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.notification.receiverEmail" for="field_receiverEmail">Receiver Email</label>
+          <input
+            type="text"
+            class="form-control"
+            name="receiverEmail"
+            id="field_receiverEmail"
+            data-cy="receiverEmail"
+            formControlName="receiverEmail"
+          />
+          <div
+            *ngIf="
+              editForm.get('receiverEmail')!.invalid && (editForm.get('receiverEmail')!.dirty || editForm.get('receiverEmail')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('receiverEmail')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.notification.receiverType" for="field_receiverType">Receiver Type</label>
+          <select class="form-control" name="receiverType" formControlName="receiverType" id="field_receiverType" data-cy="receiverType">
+            <option [ngValue]="null">{{ 'printingApp.NotificationReceivers.null' | translate }}</option>
+            <option *ngFor="let notificationReceivers of notificationReceiversValues" [value]="notificationReceivers">
+              {{ 'printingApp.NotificationReceivers.' + notificationReceivers | translate }}
+            </option>
+          </select>
+          <div
+            *ngIf="editForm.get('receiverType')!.invalid && (editForm.get('receiverType')!.dirty || editForm.get('receiverType')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('receiverType')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.notification.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'printingApp.Status.null' | translate }}</option>
+            <option *ngFor="let status of statusValues" [value]="status">{{ 'printingApp.Status.' + status | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('status')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

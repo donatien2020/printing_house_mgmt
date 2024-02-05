@@ -1,0 +1,35 @@
+{
+  "printingApp": {
+    "person": {
+      "home": {
+        "title": "People",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Person",
+        "createOrEditLabel": "Créer ou éditer un Person",
+        "notFound": "Aucun Person trouvé"
+      },
+      "created": "Un nouveau Person a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Person avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Person avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Person {{ id }} ?"
+      },
+      "detail": {
+        "title": "Person"
+      },
+      "id": "ID",
+      "nid": "Nid",
+      "docType": "Doc Type",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "gender": "Gender",
+      "birthDate": "Birth Date",
+      "birthAddress": "Birth Address",
+      "status": "Status",
+      "clients": "Clients",
+      "employees": "Employees",
+      "users": "Users",
+      "birthLocation": "Birth Location"
+    }
+  }
+}

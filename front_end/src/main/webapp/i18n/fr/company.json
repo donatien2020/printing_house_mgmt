@@ -1,0 +1,30 @@
+{
+  "printingApp": {
+    "company": {
+      "home": {
+        "title": "Companies",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Company",
+        "createOrEditLabel": "Créer ou éditer un Company",
+        "notFound": "Aucun Company trouvé"
+      },
+      "created": "Un nouveau Company a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Company avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Company avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Company {{ id }} ?"
+      },
+      "detail": {
+        "title": "Company"
+      },
+      "id": "ID",
+      "companyNames": "Company Names",
+      "tinNumber": "Tin Number",
+      "description": "Description",
+      "status": "Status",
+      "clients": "Clients",
+      "supliers": "Supliers",
+      "organizations": "Organizations"
+    }
+  }
+}

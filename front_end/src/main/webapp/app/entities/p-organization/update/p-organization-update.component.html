@@ -1,0 +1,169 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-p-organization-heading"
+        data-cy="POrganizationCreateUpdateHeading"
+        jhiTranslate="printingApp.pOrganization.home.createOrEditLabel"
+      >
+        Create or edit a P Organization
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <input type="number" *ngIf="false" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.pOrganization.officeAddress" for="field_officeAddress">Office Address</label>
+          <input
+            type="text"
+            class="form-control"
+            name="officeAddress"
+            id="field_officeAddress"
+            data-cy="officeAddress"
+            formControlName="officeAddress"
+          />
+          <div
+            *ngIf="
+              editForm.get('officeAddress')!.invalid && (editForm.get('officeAddress')!.dirty || editForm.get('officeAddress')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('officeAddress')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.pOrganization.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.pOrganization.profileID" for="field_profileID">Profile ID</label>
+          <input type="number" class="form-control" name="profileID" id="field_profileID" data-cy="profileID" formControlName="profileID" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.pOrganization.companyType" for="field_companyType">Company Type</label>
+          <select class="form-control" name="companyType" formControlName="companyType" id="field_companyType" data-cy="companyType">
+            <option [ngValue]="null">{{ 'printingApp.CompanyTypes.null' | translate }}</option>
+            <option *ngFor="let companyTypes of companyTypesValues" [value]="companyTypes">
+              {{ 'printingApp.CompanyTypes.' + companyTypes | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('companyType')!.invalid && (editForm.get('companyType')!.dirty || editForm.get('companyType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('companyType')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.pOrganization.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'printingApp.Status.null' | translate }}</option>
+            <option *ngFor="let status of statusValues" [value]="status">{{ 'printingApp.Status.' + status | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('status')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.pOrganization.company" for="field_company">Company</label>
+          <select
+            class="form-control"
+            id="field_company"
+            data-cy="company"
+            name="company"
+            formControlName="company"
+            [compareWith]="compareCompany"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="companyOption" *ngFor="let companyOption of companiesSharedCollection">{{ companyOption.companyNames }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.pOrganization.officeLocation" for="field_officeLocation"
+            >Office Location</label
+          >
+          <select
+            class="form-control"
+            id="field_officeLocation"
+            data-cy="officeLocation"
+            name="officeLocation"
+            formControlName="officeLocation"
+            [compareWith]="compareLocation"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="locationOption" *ngFor="let locationOption of locationsSharedCollection">{{ locationOption.name }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.pOrganization.parent" for="field_parent">Parent</label>
+          <select
+            class="form-control"
+            id="field_parent"
+            data-cy="parent"
+            name="parent"
+            formControlName="parent"
+            [compareWith]="comparePOrganization"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="pOrganizationOption" *ngFor="let pOrganizationOption of pOrganizationsSharedCollection">
+              {{ pOrganizationOption.description }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

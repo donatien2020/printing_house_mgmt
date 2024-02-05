@@ -1,0 +1,29 @@
+{
+  "printingApp": {
+    "rolePrivilege": {
+      "home": {
+        "title": "Role Privileges",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Role Privilege",
+        "createOrEditLabel": "Create or edit a Role Privilege",
+        "notFound": "No Role Privileges found"
+      },
+      "created": "A new Role Privilege is created with identifier {{ param }}",
+      "updated": "A Role Privilege is updated with identifier {{ param }}",
+      "deleted": "A Role Privilege is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Role Privilege {{ id }}?"
+      },
+      "detail": {
+        "title": "Role Privilege"
+      },
+      "id": "ID",
+      "status": "Status",
+      "assignedOn": "Assigned On",
+      "assignedById": "Assigned By Id",
+      "assignedByUsername": "Assigned By Username",
+      "role": "Role",
+      "privilege": "Privilege"
+    }
+  }
+}

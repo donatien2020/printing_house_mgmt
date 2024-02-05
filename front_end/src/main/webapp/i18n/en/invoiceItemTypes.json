@@ -1,0 +1,10 @@
+{
+  "printingApp": {
+    "InvoiceItemTypes": {
+      "null": "",
+      "JOB_CARD": "JOB_CARD",
+      "PRODUCT": "PRODUCT",
+      "SERVICE": "SERVICE"
+    }
+  }
+}

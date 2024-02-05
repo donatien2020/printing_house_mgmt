@@ -1,0 +1,311 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-invoice-heading" data-cy="InvoiceCreateUpdateHeading" jhiTranslate="printingApp.invoice.home.createOrEditLabel">
+        Create or edit a Invoice
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.invoice.invoiceNumber" for="field_invoiceNumber">Invoice Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="invoiceNumber"
+            id="field_invoiceNumber"
+            data-cy="invoiceNumber"
+            formControlName="invoiceNumber"
+          />
+          <div
+            *ngIf="
+              editForm.get('invoiceNumber')!.invalid && (editForm.get('invoiceNumber')!.dirty || editForm.get('invoiceNumber')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('invoiceNumber')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.invoice.totalJobCards" for="field_totalJobCards">Total Job Cards</label>
+          <input
+            type="number"
+            class="form-control"
+            name="totalJobCards"
+            id="field_totalJobCards"
+            data-cy="totalJobCards"
+            formControlName="totalJobCards"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.invoice.totalCost" for="field_totalCost">Total Cost</label>
+          <input type="number" class="form-control" name="totalCost" id="field_totalCost" data-cy="totalCost" formControlName="totalCost" />
+          <div *ngIf="editForm.get('totalCost')!.invalid && (editForm.get('totalCost')!.dirty || editForm.get('totalCost')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('totalCost')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('totalCost')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.invoice.paymentMode" for="field_paymentMode">Payment Mode</label>
+          <select class="form-control" name="paymentMode" formControlName="paymentMode" id="field_paymentMode" data-cy="paymentMode">
+            <option [ngValue]="null">{{ 'printingApp.InvoicePaymentModes.null' | translate }}</option>
+            <option *ngFor="let invoicePaymentModes of invoicePaymentModesValues" [value]="invoicePaymentModes">
+              {{ 'printingApp.InvoicePaymentModes.' + invoicePaymentModes | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('paymentMode')!.invalid && (editForm.get('paymentMode')!.dirty || editForm.get('paymentMode')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('paymentMode')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.invoice.paymentType" for="field_paymentType">Payment Type</label>
+          <select class="form-control" name="paymentType" formControlName="paymentType" id="field_paymentType" data-cy="paymentType">
+            <option [ngValue]="null">{{ 'printingApp.PaymentTypes.null' | translate }}</option>
+            <option *ngFor="let paymentTypes of paymentTypesValues" [value]="paymentTypes">
+              {{ 'printingApp.PaymentTypes.' + paymentTypes | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('paymentType')!.invalid && (editForm.get('paymentType')!.dirty || editForm.get('paymentType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('paymentType')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.invoice.invoiceType" for="field_invoiceType">Invoice Type</label>
+          <select class="form-control" name="invoiceType" formControlName="invoiceType" id="field_invoiceType" data-cy="invoiceType">
+            <option [ngValue]="null">{{ 'printingApp.InvoiceTypes.null' | translate }}</option>
+            <option *ngFor="let invoiceTypes of invoiceTypesValues" [value]="invoiceTypes">
+              {{ 'printingApp.InvoiceTypes.' + invoiceTypes | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('invoiceType')!.invalid && (editForm.get('invoiceType')!.dirty || editForm.get('invoiceType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('invoiceType')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.invoice.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'printingApp.InvoicingStatuses.null' | translate }}</option>
+            <option *ngFor="let invoicingStatuses of invoicingStatusesValues" [value]="invoicingStatuses">
+              {{ 'printingApp.InvoicingStatuses.' + invoicingStatuses | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('status')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.invoice.receptionOrderId" for="field_receptionOrderId"
+            >Reception Order Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="receptionOrderId"
+            id="field_receptionOrderId"
+            data-cy="receptionOrderId"
+            formControlName="receptionOrderId"
+          />
+          <div
+            *ngIf="
+              editForm.get('receptionOrderId')!.invalid &&
+              (editForm.get('receptionOrderId')!.dirty || editForm.get('receptionOrderId')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('receptionOrderId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('receptionOrderId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.invoice.invoicedOn" for="field_invoicedOn">Invoiced On</label>
+          <div class="d-flex">
+            <input
+              id="field_invoicedOn"
+              data-cy="invoicedOn"
+              type="datetime-local"
+              class="form-control"
+              name="invoicedOn"
+              formControlName="invoicedOn"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.invoice.dueOn" for="field_dueOn">Due On</label>
+          <div class="d-flex">
+            <input
+              id="field_dueOn"
+              data-cy="dueOn"
+              type="datetime-local"
+              class="form-control"
+              name="dueOn"
+              formControlName="dueOn"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.invoice.fromOrganizationId" for="field_fromOrganizationId"
+            >From Organization Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="fromOrganizationId"
+            id="field_fromOrganizationId"
+            data-cy="fromOrganizationId"
+            formControlName="fromOrganizationId"
+          />
+          <div
+            *ngIf="
+              editForm.get('fromOrganizationId')!.invalid &&
+              (editForm.get('fromOrganizationId')!.dirty || editForm.get('fromOrganizationId')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('fromOrganizationId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('fromOrganizationId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.invoice.debtor" for="field_debtor">Debtor</label>
+          <select
+            class="form-control"
+            id="field_debtor"
+            data-cy="debtor"
+            name="debtor"
+            formControlName="debtor"
+            [compareWith]="compareDebtor"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="debtorOption" *ngFor="let debtorOption of debtorsSharedCollection">{{ debtorOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.invoice.invoiceToClient" for="field_invoiceToClient">Invoice To Client</label>
+          <select
+            class="form-control"
+            id="field_invoiceToClient"
+            data-cy="invoiceToClient"
+            name="invoiceToClient"
+            formControlName="invoiceToClient"
+            [compareWith]="compareClient"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="clientOption" *ngFor="let clientOption of clientsSharedCollection">{{ clientOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.invoice.toOrganization" for="field_toOrganization">To Organization</label>
+          <select
+            class="form-control"
+            id="field_toOrganization"
+            data-cy="toOrganization"
+            name="toOrganization"
+            formControlName="toOrganization"
+            [compareWith]="comparePOrganization"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="pOrganizationOption" *ngFor="let pOrganizationOption of pOrganizationsSharedCollection">
+              {{ pOrganizationOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+{
+  "printingApp": {
+    "Genders": {
+      "null": "",
+      "MALE": "MALE",
+      "FEMALE": "FEMALE"
+    }
+  }
+}

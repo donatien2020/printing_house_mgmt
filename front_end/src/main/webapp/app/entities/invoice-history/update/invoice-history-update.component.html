@@ -1,0 +1,122 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-invoice-history-heading"
+        data-cy="InvoiceHistoryCreateUpdateHeading"
+        jhiTranslate="printingApp.invoiceHistory.home.createOrEditLabel"
+      >
+        Create or edit a Invoice History
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.invoiceHistory.invoiceId" for="field_invoiceId">Invoice Id</label>
+          <input type="number" class="form-control" name="invoiceId" id="field_invoiceId" data-cy="invoiceId" formControlName="invoiceId" />
+          <div *ngIf="editForm.get('invoiceId')!.invalid && (editForm.get('invoiceId')!.dirty || editForm.get('invoiceId')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('invoiceId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('invoiceId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.invoiceHistory.action" for="field_action">Action</label>
+          <select class="form-control" name="action" formControlName="action" id="field_action" data-cy="action">
+            <option [ngValue]="null">{{ 'printingApp.InvoiceActions.null' | translate }}</option>
+            <option *ngFor="let invoiceActions of invoiceActionsValues" [value]="invoiceActions">
+              {{ 'printingApp.InvoiceActions.' + invoiceActions | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('action')!.invalid && (editForm.get('action')!.dirty || editForm.get('action')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('action')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.invoiceHistory.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.invoiceHistory.doneOn" for="field_doneOn">Done On</label>
+          <div class="d-flex">
+            <input
+              id="field_doneOn"
+              data-cy="doneOn"
+              type="datetime-local"
+              class="form-control"
+              name="doneOn"
+              formControlName="doneOn"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('doneOn')!.invalid && (editForm.get('doneOn')!.dirty || editForm.get('doneOn')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('doneOn')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('doneOn')?.errors?.datetimelocal"
+              jhiTranslate="entity.validation.datetimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

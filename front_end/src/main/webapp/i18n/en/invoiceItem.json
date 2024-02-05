@@ -1,0 +1,30 @@
+{
+  "printingApp": {
+    "invoiceItem": {
+      "home": {
+        "title": "Invoice Items",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Invoice Item",
+        "createOrEditLabel": "Create or edit a Invoice Item",
+        "notFound": "No Invoice Items found"
+      },
+      "created": "A new Invoice Item is created with identifier {{ param }}",
+      "updated": "A Invoice Item is updated with identifier {{ param }}",
+      "deleted": "A Invoice Item is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Invoice Item {{ id }}?"
+      },
+      "detail": {
+        "title": "Invoice Item"
+      },
+      "id": "ID",
+      "itemId": "Item Id",
+      "invoiceId": "Invoice Id",
+      "itemType": "Item Type",
+      "unitPrice": "Unit Price",
+      "quantity": "Quantity",
+      "totalCost": "Total Cost",
+      "status": "Status"
+    }
+  }
+}

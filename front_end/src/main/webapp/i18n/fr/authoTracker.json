@@ -1,0 +1,27 @@
+{
+  "printingApp": {
+    "authoTracker": {
+      "home": {
+        "title": "AuthoTrackers",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Autho Tracker",
+        "createOrEditLabel": "Créer ou éditer un Autho Tracker",
+        "notFound": "Aucun Autho Tracker trouvé"
+      },
+      "created": "Un nouveau Autho Tracker a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Autho Tracker avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Autho Tracker avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Autho Tracker {{ id }} ?"
+      },
+      "detail": {
+        "title": "Autho Tracker"
+      },
+      "id": "ID",
+      "username": "Username",
+      "token": "Token",
+      "status": "Status",
+      "logedInOn": "Loged In On"
+    }
+  }
+}

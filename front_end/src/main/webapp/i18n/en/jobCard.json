@@ -1,0 +1,35 @@
+{
+  "printingApp": {
+    "jobCard": {
+      "home": {
+        "title": "Job Cards",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Job Card",
+        "createOrEditLabel": "Create or edit a Job Card",
+        "notFound": "No Job Cards found"
+      },
+      "created": "A new Job Card is created with identifier {{ param }}",
+      "updated": "A Job Card is updated with identifier {{ param }}",
+      "deleted": "A Job Card is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Job Card {{ id }}?"
+      },
+      "detail": {
+        "title": "Job Card"
+      },
+      "id": "ID",
+      "description": "Description",
+      "quantity": "Quantity",
+      "unitPrice": "Unit Price",
+      "startedOn": "Started On",
+      "completedOn": "Completed On",
+      "divisionId": "Division Id",
+      "divisionName": "Division Name",
+      "performance": "Performance",
+      "status": "Status",
+      "assignments": "Assignments",
+      "cardItems": "Card Items",
+      "clientReceptionOrder": "Client Reception Order"
+    }
+  }
+}

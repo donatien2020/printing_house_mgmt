@@ -1,0 +1,27 @@
+{
+  "printingApp": {
+    "authoTracker": {
+      "home": {
+        "title": "Autho Trackers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Autho Tracker",
+        "createOrEditLabel": "Create or edit a Autho Tracker",
+        "notFound": "No Autho Trackers found"
+      },
+      "created": "A new Autho Tracker is created with identifier {{ param }}",
+      "updated": "A Autho Tracker is updated with identifier {{ param }}",
+      "deleted": "A Autho Tracker is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Autho Tracker {{ id }}?"
+      },
+      "detail": {
+        "title": "Autho Tracker"
+      },
+      "id": "ID",
+      "username": "Username",
+      "token": "Token",
+      "status": "Status",
+      "logedInOn": "Loged In On"
+    }
+  }
+}

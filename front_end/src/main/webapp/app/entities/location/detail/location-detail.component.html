@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="location">
+      <h2 data-cy="locationDetailsHeading"><span jhiTranslate="printingApp.location.detail.title">Location</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <!--<dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ location.id }}</span>
+        </dd>-->
+        <dt><span jhiTranslate="printingApp.location.code">Code</span></dt>
+        <dd>
+          <span>{{ location.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.location.name">Name</span></dt>
+        <dd>
+          <span>{{ location.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.location.description">Description</span></dt>
+        <dd>
+          <span>{{ location.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.location.createdOn">Created On</span></dt>
+        <dd>
+          <span>{{ location.createdOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.location.createdById">Created By Id</span></dt>
+        <dd>
+          <span>{{ location.createdById }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.location.createdByUsername">Created By Username</span></dt>
+        <dd>
+          <span>{{ location.createdByUsername }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.location.updatedById">Updated By Id</span></dt>
+        <dd>
+          <span>{{ location.updatedById }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.location.updatedByUsername">Updated By Username</span></dt>
+        <dd>
+          <span>{{ location.updatedByUsername }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.location.updatedOn">Updated On</span></dt>
+        <dd>
+          <span>{{ location.updatedOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.location.parent">Parent</span></dt>
+        <dd>
+          <div *ngIf="location.parent">
+            <a [routerLink]="['/location', location.parent.id, 'view']">{{ location.parent.name }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="printingApp.location.level">Level</span></dt>
+        <dd>
+          <div *ngIf="location.level">
+            <a [routerLink]="['/location-level', location.level.id, 'view']">{{ location.level.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/location', location.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

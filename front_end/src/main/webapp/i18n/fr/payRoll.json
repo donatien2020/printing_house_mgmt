@@ -1,0 +1,30 @@
+{
+  "printingApp": {
+    "payRoll": {
+      "home": {
+        "title": "PayRolls",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Pay Roll",
+        "createOrEditLabel": "Créer ou éditer un Pay Roll",
+        "notFound": "Aucun Pay Roll trouvé"
+      },
+      "created": "Un nouveau Pay Roll a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Pay Roll avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Pay Roll avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Pay Roll {{ id }} ?"
+      },
+      "detail": {
+        "title": "Pay Roll"
+      },
+      "id": "ID",
+      "organizationId": "Organization Id",
+      "payFrom": "Pay From",
+      "payTo": "Pay To",
+      "status": "Status",
+      "totalGrossAmount": "Total Gross Amount",
+      "totalNetAmount": "Total Net Amount",
+      "items": "Items"
+    }
+  }
+}

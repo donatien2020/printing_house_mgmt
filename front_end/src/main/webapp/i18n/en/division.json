@@ -1,0 +1,33 @@
+{
+  "printingApp": {
+    "division": {
+      "home": {
+        "title": "Divisions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Division",
+        "createOrEditLabel": "Create or edit a Division",
+        "notFound": "No Divisions found"
+      },
+      "created": "A new Division is created with identifier {{ param }}",
+      "updated": "A Division is updated with identifier {{ param }}",
+      "deleted": "A Division is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Division {{ id }}?"
+      },
+      "detail": {
+        "title": "Division"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "level": "Level",
+      "divisionType": "Division Type",
+      "status": "Status",
+      "childreen": "Childreen",
+      "emplyees": "Emplyees",
+      "users": "Users",
+      "parent": "Parent",
+      "organization": "Organization"
+    }
+  }
+}

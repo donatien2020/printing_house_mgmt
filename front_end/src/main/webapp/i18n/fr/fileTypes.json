@@ -1,0 +1,10 @@
+{
+  "printingApp": {
+    "FileTypes": {
+      "null": "",
+      "IMAGE": "IMAGE",
+      "VIDEO": "VIDEO",
+      "DOCUMENT": "DOCUMENT"
+    }
+  }
+}

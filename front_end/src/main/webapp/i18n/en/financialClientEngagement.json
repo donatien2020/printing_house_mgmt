@@ -1,0 +1,30 @@
+{
+  "printingApp": {
+    "financialClientEngagement": {
+      "home": {
+        "title": "Financial Client Engagements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Financial Client Engagement",
+        "createOrEditLabel": "Create or edit a Financial Client Engagement",
+        "notFound": "No Financial Client Engagements found"
+      },
+      "created": "A new Financial Client Engagement is created with identifier {{ param }}",
+      "updated": "A Financial Client Engagement is updated with identifier {{ param }}",
+      "deleted": "A Financial Client Engagement is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Financial Client Engagement {{ id }}?"
+      },
+      "detail": {
+        "title": "Financial Client Engagement"
+      },
+      "id": "ID",
+      "userId": "User Id",
+      "clientId": "Client Id",
+      "clientNames": "Client Names",
+      "discussionSummary": "Discussion Summary",
+      "reason": "Reason",
+      "conclusion": "Conclusion",
+      "contractId": "Contract Id"
+    }
+  }
+}

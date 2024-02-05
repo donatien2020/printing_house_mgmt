@@ -1,0 +1,9 @@
+{
+  "printingApp": {
+    "NotificationTypes": {
+      "null": "",
+      "E_MAIL": "E_MAIL",
+      "SMS": "SMS"
+    }
+  }
+}

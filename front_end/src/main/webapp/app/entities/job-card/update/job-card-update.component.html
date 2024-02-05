@@ -1,0 +1,229 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-job-card-heading" data-cy="JobCardCreateUpdateHeading" jhiTranslate="printingApp.jobCard.home.createOrEditLabel">
+        Create or edit a Job Card
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+         <!-- <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>-->
+          <input type="number" class="form-control" *ngIf="false" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.jobCard.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.jobCard.quantity" for="field_quantity">Quantity</label>
+          <input type="number" class="form-control" name="quantity" id="field_quantity" data-cy="quantity" formControlName="quantity" />
+          <div *ngIf="editForm.get('quantity')!.invalid && (editForm.get('quantity')!.dirty || editForm.get('quantity')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('quantity')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('quantity')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.jobCard.unitPrice" for="field_unitPrice">Unit Price</label>
+          <input type="number" class="form-control" name="unitPrice" id="field_unitPrice" data-cy="unitPrice" formControlName="unitPrice" />
+          <div *ngIf="editForm.get('unitPrice')!.invalid && (editForm.get('unitPrice')!.dirty || editForm.get('unitPrice')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('unitPrice')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('unitPrice')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.jobCard.startedOn" for="field_startedOn">Started On</label>
+          <div class="d-flex">
+            <input
+              id="field_startedOn"
+              data-cy="startedOn"
+              type="datetime-local"
+              class="form-control"
+              name="startedOn"
+              formControlName="startedOn"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.jobCard.completedOn" for="field_completedOn">Completed On</label>
+          <div class="d-flex">
+            <input
+              id="field_completedOn"
+              data-cy="completedOn"
+              type="datetime-local"
+              class="form-control"
+              name="completedOn"
+              formControlName="completedOn"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.jobCard.divisionId" for="field_divisionId">Division Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="divisionId"
+            id="field_divisionId"
+            data-cy="divisionId"
+            formControlName="divisionId"
+          />
+          <div *ngIf="editForm.get('divisionId')!.invalid && (editForm.get('divisionId')!.dirty || editForm.get('divisionId')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('divisionId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('divisionId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.jobCard.divisionName" for="field_divisionName">Division Name</label>
+          <input
+            type="number"
+            class="form-control"
+            name="divisionName"
+            id="field_divisionName"
+            data-cy="divisionName"
+            formControlName="divisionName"
+          />
+          <div
+            *ngIf="editForm.get('divisionName')!.invalid && (editForm.get('divisionName')!.dirty || editForm.get('divisionName')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('divisionName')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('divisionName')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.jobCard.performance" for="field_performance">Performance</label>
+          <select class="form-control" name="performance" formControlName="performance" id="field_performance" data-cy="performance">
+            <option [ngValue]="null">{{ 'printingApp.PerformanceMeasures.null' | translate }}</option>
+            <option *ngFor="let performanceMeasures of performanceMeasuresValues" [value]="performanceMeasures">
+              {{ 'printingApp.PerformanceMeasures.' + performanceMeasures | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('performance')!.invalid && (editForm.get('performance')!.dirty || editForm.get('performance')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('performance')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.jobCard.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'printingApp.JobCardStatuses.null' | translate }}</option>
+            <option *ngFor="let jobCardStatuses of jobCardStatusesValues" [value]="jobCardStatuses">
+              {{ 'printingApp.JobCardStatuses.' + jobCardStatuses | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('status')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.jobCard.clientReceptionOrder" for="field_clientReceptionOrder"
+            >Client Reception Order</label
+          >
+          <select
+            class="form-control"
+            id="field_clientReceptionOrder"
+            data-cy="clientReceptionOrder"
+            name="clientReceptionOrder"
+            formControlName="clientReceptionOrder"
+            [compareWith]="compareClientReceptionOrder"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="clientReceptionOrderOption" *ngFor="let clientReceptionOrderOption of clientReceptionOrdersSharedCollection">
+              {{ clientReceptionOrderOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+export enum FileOwnerTypes {
+  ORGANIZATION = 'ORGANIZATION',
+
+  CLIENT = 'CLIENT',
+
+  DELIVERY = 'DELIVERY',
+
+  PRODUCT = 'PRODUCT',
+
+  USER = 'USER',
+
+  CONTRACT = 'CONTRACT',
+}

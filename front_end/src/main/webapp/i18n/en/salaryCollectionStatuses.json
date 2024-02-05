@@ -1,0 +1,10 @@
+{
+  "printingApp": {
+    "SalaryCollectionStatuses": {
+      "null": "",
+      "COMPUTED": "COMPUTED",
+      "COLLECTED": "COLLECTED",
+      "LOCKED": "LOCKED"
+    }
+  }
+}

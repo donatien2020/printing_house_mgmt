@@ -1,0 +1,11 @@
+{
+  "printingApp": {
+    "EmploymentStatuses": {
+      "null": "",
+      "RECRUITED": "RECRUITED",
+      "ACTIVE": "ACTIVE",
+      "SUSPENDED": "SUSPENDED",
+      "DISMISSED": "DISMISSED"
+    }
+  }
+}

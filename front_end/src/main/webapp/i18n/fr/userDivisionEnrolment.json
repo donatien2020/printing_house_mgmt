@@ -1,0 +1,28 @@
+{
+  "printingApp": {
+    "userDivisionEnrolment": {
+      "home": {
+        "title": "UserDivisionEnrolments",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau User Division Enrolment",
+        "createOrEditLabel": "Créer ou éditer un User Division Enrolment",
+        "notFound": "Aucun User Division Enrolment trouvé"
+      },
+      "created": "Un nouveau User Division Enrolment a été créé avec l'identifiant {{ param }}",
+      "updated": "Le User Division Enrolment avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le User Division Enrolment avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le User Division Enrolment {{ id }} ?"
+      },
+      "detail": {
+        "title": "User Division Enrolment"
+      },
+      "id": "ID",
+      "startedOn": "Started On",
+      "endedOn": "Ended On",
+      "status": "Status",
+      "user": "User",
+      "division": "Division"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "printingApp": {
+    "PaymentTypes": {
+      "null": "",
+      "INSTANT": "INSTANT",
+      "CREDIT": "CREDIT"
+    }
+  }
+}

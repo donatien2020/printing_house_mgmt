@@ -1,0 +1,186 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-job-card-assignment-heading"
+        data-cy="JobCardAssignmentCreateUpdateHeading"
+        jhiTranslate="printingApp.jobCardAssignment.home.createOrEditLabel"
+      >
+        Create or edit a Job Card Assignment
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <!--<label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>-->
+          <input type="number" class="form-control" *ngIf="false" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.jobCardAssignment.assignedToId" for="field_assignedToId"
+            >Assigned To Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="assignedToId"
+            id="field_assignedToId"
+            data-cy="assignedToId"
+            formControlName="assignedToId"
+          />
+          <div
+            *ngIf="editForm.get('assignedToId')!.invalid && (editForm.get('assignedToId')!.dirty || editForm.get('assignedToId')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('assignedToId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('assignedToId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.jobCardAssignment.assignedNames" for="field_assignedNames"
+            >Assigned Names</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="assignedNames"
+            id="field_assignedNames"
+            data-cy="assignedNames"
+            formControlName="assignedNames"
+          />
+          <div
+            *ngIf="
+              editForm.get('assignedNames')!.invalid && (editForm.get('assignedNames')!.dirty || editForm.get('assignedNames')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('assignedNames')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('assignedNames')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.jobCardAssignment.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.jobCardAssignment.assignmentMode" for="field_assignmentMode"
+            >Assignment Mode</label
+          >
+          <select
+            class="form-control"
+            name="assignmentMode"
+            formControlName="assignmentMode"
+            id="field_assignmentMode"
+            data-cy="assignmentMode"
+          >
+            <option [ngValue]="null">{{ 'printingApp.JobCardAssignmentModes.null' | translate }}</option>
+            <option *ngFor="let jobCardAssignmentModes of jobCardAssignmentModesValues" [value]="jobCardAssignmentModes">
+              {{ 'printingApp.JobCardAssignmentModes.' + jobCardAssignmentModes | translate }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              editForm.get('assignmentMode')!.invalid && (editForm.get('assignmentMode')!.dirty || editForm.get('assignmentMode')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('assignmentMode')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.jobCardAssignment.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'printingApp.JobCardAssignmentStatuses.null' | translate }}</option>
+            <option *ngFor="let jobCardAssignmentStatuses of jobCardAssignmentStatusesValues" [value]="jobCardAssignmentStatuses">
+              {{ 'printingApp.JobCardAssignmentStatuses.' + jobCardAssignmentStatuses | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('status')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.jobCardAssignment.jobCard" for="field_jobCard">Job Card</label>
+          <select
+            class="form-control"
+            id="field_jobCard"
+            data-cy="jobCard"
+            name="jobCard"
+            formControlName="jobCard"
+            [compareWith]="compareJobCard"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="jobCardOption" *ngFor="let jobCardOption of jobCardsSharedCollection">{{ jobCardOption.description}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

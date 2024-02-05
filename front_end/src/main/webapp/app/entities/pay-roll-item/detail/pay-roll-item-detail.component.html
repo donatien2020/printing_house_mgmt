@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="payRollItem">
+      <h2 data-cy="payRollItemDetailsHeading"><span jhiTranslate="printingApp.payRollItem.detail.title">Pay Roll Item</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <!--<dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ payRollItem.id }}</span>
+        </dd>-->
+        <dt><span jhiTranslate="printingApp.payRollItem.divisionId">Division Id</span></dt>
+        <dd>
+          <span>{{ payRollItem.divisionId }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.payRollItem.empId">Emp Id</span></dt>
+        <dd>
+          <span>{{ payRollItem.empId }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.payRollItem.empNumber">Emp Number</span></dt>
+        <dd>
+          <span>{{ payRollItem.empNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.payRollItem.netAmount">Net Amount</span></dt>
+        <dd>
+          <span>{{ payRollItem.netAmount }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.payRollItem.grossAmount">Gross Amount</span></dt>
+        <dd>
+          <span>{{ payRollItem.grossAmount }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.payRollItem.collectionStatus">Collection Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.SalaryCollectionStatuses.' + payRollItem.collectionStatus }}">{{
+            payRollItem.collectionStatus
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.payRollItem.collectionDate">Collection Date</span></dt>
+        <dd>
+          <span>{{ payRollItem.collectionDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.payRollItem.computationDate">Computation Date</span></dt>
+        <dd>
+          <span>{{ payRollItem.computationDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.payRollItem.payRoll">Pay Roll</span></dt>
+        <dd>
+          <div *ngIf="payRollItem.payRoll">
+            <a [routerLink]="['/pay-roll', payRollItem.payRoll.id, 'view']">{{ payRollItem.payRoll.payFrom }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/pay-roll-item', payRollItem.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

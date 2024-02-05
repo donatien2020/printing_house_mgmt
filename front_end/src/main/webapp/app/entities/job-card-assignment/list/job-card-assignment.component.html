@@ -1,0 +1,129 @@
+<div>
+  <h2 id="page-heading" data-cy="JobCardAssignmentHeading">
+    <span jhiTranslate="printingApp.jobCardAssignment.home.title">Job Card Assignments</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="printingApp.jobCardAssignment.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-job-card-assignment"
+        [routerLink]="['/job-card-assignment/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="printingApp.jobCardAssignment.home.createLabel"> Create a new Job Card Assignment </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="jobCardAssignments?.length === 0">
+    <span jhiTranslate="printingApp.jobCardAssignment.home.notFound">No Job Card Assignments found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="jobCardAssignments && jobCardAssignments.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <!--<th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>-->
+          <th scope="col" jhiSortBy="assignedToId">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.jobCardAssignment.assignedToId">Assigned To Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="assignedNames">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.jobCardAssignment.assignedNames">Assigned Names</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.jobCardAssignment.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="assignmentMode">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.jobCardAssignment.assignmentMode">Assignment Mode</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.jobCardAssignment.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="jobCard.id">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.jobCardAssignment.jobCard">Job Card</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let jobCardAssignment of jobCardAssignments; trackBy: trackId" data-cy="entityTable">
+          <!--<td>
+            <a [routerLink]="['/job-card-assignment', jobCardAssignment.id, 'view']">{{ jobCardAssignment.id }}</a>
+          </td>-->
+          <td>{{ jobCardAssignment.assignedToId }}</td>
+          <td>{{ jobCardAssignment.assignedNames }}</td>
+          <td>{{ jobCardAssignment.description }}</td>
+          <td jhiTranslate="{{ 'printingApp.JobCardAssignmentModes.' + jobCardAssignment.assignmentMode }}">
+            {{ jobCardAssignment.assignmentMode }}
+          </td>
+          <td jhiTranslate="{{ 'printingApp.JobCardAssignmentStatuses.' + jobCardAssignment.status }}">{{ jobCardAssignment.status }}</td>
+          <td>
+            <div *ngIf="jobCardAssignment.jobCard">
+              <a [routerLink]="['/job-card', jobCardAssignment.jobCard.id, 'view']">{{ jobCardAssignment.jobCard.description }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/job-card-assignment', jobCardAssignment.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/job-card-assignment', jobCardAssignment.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(jobCardAssignment)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

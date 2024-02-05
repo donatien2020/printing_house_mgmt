@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="userDivisionEnrolment">
+      <h2 data-cy="userDivisionEnrolmentDetailsHeading">
+        <span jhiTranslate="printingApp.userDivisionEnrolment.detail.title">User Division Enrolment</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ userDivisionEnrolment.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.userDivisionEnrolment.startedOn">Started On</span></dt>
+        <dd>
+          <span>{{ userDivisionEnrolment.startedOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.userDivisionEnrolment.endedOn">Ended On</span></dt>
+        <dd>
+          <span>{{ userDivisionEnrolment.endedOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.userDivisionEnrolment.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.EnrollmentStatus.' + userDivisionEnrolment.status }}">{{
+            userDivisionEnrolment.status
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.userDivisionEnrolment.user">User</span></dt>
+        <dd>
+          <div *ngIf="userDivisionEnrolment.user">
+            <a [routerLink]="['/p-user', userDivisionEnrolment.user.id, 'view']">{{ userDivisionEnrolment.user.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="printingApp.userDivisionEnrolment.division">Division</span></dt>
+        <dd>
+          <div *ngIf="userDivisionEnrolment.division">
+            <a [routerLink]="['/division', userDivisionEnrolment.division.id, 'view']">{{ userDivisionEnrolment.division.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/user-division-enrolment', userDivisionEnrolment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+{
+  "printingApp": {
+    "DebtInvoicingStatuses": {
+      "null": "",
+      "INVOICED": "INVOICED",
+      "PENDING": "PENDING"
+    }
+  }
+}

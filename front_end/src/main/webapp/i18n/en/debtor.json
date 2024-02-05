@@ -1,0 +1,31 @@
+{
+  "printingApp": {
+    "debtor": {
+      "home": {
+        "title": "Debtors",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Debtor",
+        "createOrEditLabel": "Create or edit a Debtor",
+        "notFound": "No Debtors found"
+      },
+      "created": "A new Debtor is created with identifier {{ param }}",
+      "updated": "A Debtor is updated with identifier {{ param }}",
+      "deleted": "A Debtor is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Debtor {{ id }}?"
+      },
+      "detail": {
+        "title": "Debtor"
+      },
+      "id": "ID",
+      "serviceDescription": "Service Description",
+      "productDescription": "Product Description",
+      "debtDate": "Debt Date",
+      "debtStatus": "Debt Status",
+      "invoicingStatus": "Invoicing Status",
+      "totalAmount": "Total Amount",
+      "paidAmount": "Paid Amount",
+      "supplier": "Supplier"
+    }
+  }
+}

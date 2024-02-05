@@ -1,0 +1,159 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-financial-client-engagement-heading"
+        data-cy="FinancialClientEngagementCreateUpdateHeading"
+        jhiTranslate="printingApp.financialClientEngagement.home.createOrEditLabel"
+      >
+        Create or edit a Financial Client Engagement
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.financialClientEngagement.userId" for="field_userId">User Id</label>
+          <input type="number" class="form-control" name="userId" id="field_userId" data-cy="userId" formControlName="userId" />
+          <div *ngIf="editForm.get('userId')!.invalid && (editForm.get('userId')!.dirty || editForm.get('userId')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('userId')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('userId')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.financialClientEngagement.clientId" for="field_clientId">Client Id</label>
+          <input type="number" class="form-control" name="clientId" id="field_clientId" data-cy="clientId" formControlName="clientId" />
+          <div *ngIf="editForm.get('clientId')!.invalid && (editForm.get('clientId')!.dirty || editForm.get('clientId')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('clientId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('clientId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.financialClientEngagement.clientNames" for="field_clientNames"
+            >Client Names</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="clientNames"
+            id="field_clientNames"
+            data-cy="clientNames"
+            formControlName="clientNames"
+          />
+          <div *ngIf="editForm.get('clientNames')!.invalid && (editForm.get('clientNames')!.dirty || editForm.get('clientNames')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('clientNames')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('clientNames')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.financialClientEngagement.discussionSummary" for="field_discussionSummary"
+            >Discussion Summary</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="discussionSummary"
+            id="field_discussionSummary"
+            data-cy="discussionSummary"
+            formControlName="discussionSummary"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.financialClientEngagement.reason" for="field_reason">Reason</label>
+          <select class="form-control" name="reason" formControlName="reason" id="field_reason" data-cy="reason">
+            <option [ngValue]="null">{{ 'printingApp.EngagementReasons.null' | translate }}</option>
+            <option *ngFor="let engagementReasons of engagementReasonsValues" [value]="engagementReasons">
+              {{ 'printingApp.EngagementReasons.' + engagementReasons | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('reason')!.invalid && (editForm.get('reason')!.dirty || editForm.get('reason')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('reason')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.financialClientEngagement.conclusion" for="field_conclusion"
+            >Conclusion</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="conclusion"
+            id="field_conclusion"
+            data-cy="conclusion"
+            formControlName="conclusion"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.financialClientEngagement.contractId" for="field_contractId"
+            >Contract Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="contractId"
+            id="field_contractId"
+            data-cy="contractId"
+            formControlName="contractId"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

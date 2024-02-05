@@ -1,0 +1,124 @@
+<div>
+  <h2 id="page-heading" data-cy="UserDivisionEnrolmentHeading">
+    <span jhiTranslate="printingApp.userDivisionEnrolment.home.title">User Division Enrolments</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="printingApp.userDivisionEnrolment.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-user-division-enrolment"
+        [routerLink]="['/user-division-enrolment/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="printingApp.userDivisionEnrolment.home.createLabel"> Create a new User Division Enrolment </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="userDivisionEnrolments?.length === 0">
+    <span jhiTranslate="printingApp.userDivisionEnrolment.home.notFound">No User Division Enrolments found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="userDivisionEnrolments && userDivisionEnrolments.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="startedOn">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.userDivisionEnrolment.startedOn">Started On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="endedOn">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.userDivisionEnrolment.endedOn">Ended On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.userDivisionEnrolment.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="user.id">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.userDivisionEnrolment.user">User</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="division.id">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.userDivisionEnrolment.division">Division</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let userDivisionEnrolment of userDivisionEnrolments; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/user-division-enrolment', userDivisionEnrolment.id, 'view']">{{ userDivisionEnrolment.id }}</a>
+          </td>
+          <td>{{ userDivisionEnrolment.startedOn | formatMediumDatetime }}</td>
+          <td>{{ userDivisionEnrolment.endedOn | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'printingApp.EnrollmentStatus.' + userDivisionEnrolment.status }}">{{ userDivisionEnrolment.status }}</td>
+          <td>
+            <div *ngIf="userDivisionEnrolment.user">
+              <a [routerLink]="['/p-user', userDivisionEnrolment.user.id, 'view']">{{ userDivisionEnrolment.user.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="userDivisionEnrolment.division">
+              <a [routerLink]="['/division', userDivisionEnrolment.division.id, 'view']">{{ userDivisionEnrolment.division.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/user-division-enrolment', userDivisionEnrolment.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/user-division-enrolment', userDivisionEnrolment.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(userDivisionEnrolment)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

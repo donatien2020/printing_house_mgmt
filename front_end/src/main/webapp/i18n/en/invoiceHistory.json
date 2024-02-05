@@ -1,0 +1,27 @@
+{
+  "printingApp": {
+    "invoiceHistory": {
+      "home": {
+        "title": "Invoice Histories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Invoice History",
+        "createOrEditLabel": "Create or edit a Invoice History",
+        "notFound": "No Invoice Histories found"
+      },
+      "created": "A new Invoice History is created with identifier {{ param }}",
+      "updated": "A Invoice History is updated with identifier {{ param }}",
+      "deleted": "A Invoice History is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Invoice History {{ id }}?"
+      },
+      "detail": {
+        "title": "Invoice History"
+      },
+      "id": "ID",
+      "invoiceId": "Invoice Id",
+      "action": "Action",
+      "description": "Description",
+      "doneOn": "Done On"
+    }
+  }
+}

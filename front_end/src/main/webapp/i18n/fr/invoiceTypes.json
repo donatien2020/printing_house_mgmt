@@ -1,0 +1,12 @@
+{
+  "printingApp": {
+    "InvoiceTypes": {
+      "null": "",
+      "PURCHASE": "PURCHASE",
+      "SALES": "SALES",
+      "REFUND": "REFUND",
+      "REVERSAL": "REVERSAL",
+      "BILL": "BILL"
+    }
+  }
+}

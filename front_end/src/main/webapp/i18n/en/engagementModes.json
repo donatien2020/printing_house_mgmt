@@ -1,0 +1,9 @@
+{
+  "printingApp": {
+    "EngagementModes": {
+      "null": "",
+      "CONTRACTUAL": "CONTRACTUAL",
+      "PASSENGER": "PASSENGER"
+    }
+  }
+}

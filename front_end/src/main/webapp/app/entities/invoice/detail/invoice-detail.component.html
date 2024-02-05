@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="invoice">
+      <h2 data-cy="invoiceDetailsHeading"><span jhiTranslate="printingApp.invoice.detail.title">Invoice</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ invoice.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoice.invoiceNumber">Invoice Number</span></dt>
+        <dd>
+          <span>{{ invoice.invoiceNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoice.totalJobCards">Total Job Cards</span></dt>
+        <dd>
+          <span>{{ invoice.totalJobCards }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoice.totalCost">Total Cost</span></dt>
+        <dd>
+          <span>{{ invoice.totalCost }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoice.paymentMode">Payment Mode</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.InvoicePaymentModes.' + invoice.paymentMode }}">{{ invoice.paymentMode }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoice.paymentType">Payment Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.PaymentTypes.' + invoice.paymentType }}">{{ invoice.paymentType }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoice.invoiceType">Invoice Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.InvoiceTypes.' + invoice.invoiceType }}">{{ invoice.invoiceType }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoice.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.InvoicingStatuses.' + invoice.status }}">{{ invoice.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoice.receptionOrderId">Reception Order Id</span></dt>
+        <dd>
+          <span>{{ invoice.receptionOrderId }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoice.invoicedOn">Invoiced On</span></dt>
+        <dd>
+          <span>{{ invoice.invoicedOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoice.dueOn">Due On</span></dt>
+        <dd>
+          <span>{{ invoice.dueOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoice.fromOrganizationId">From Organization Id</span></dt>
+        <dd>
+          <span>{{ invoice.fromOrganizationId }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoice.debtor">Debtor</span></dt>
+        <dd>
+          <div *ngIf="invoice.debtor">
+            <a [routerLink]="['/debtor', invoice.debtor.id, 'view']">{{ invoice.debtor.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoice.invoiceToClient">Invoice To Client</span></dt>
+        <dd>
+          <div *ngIf="invoice.invoiceToClient">
+            <a [routerLink]="['/client', invoice.invoiceToClient.id, 'view']">{{ invoice.invoiceToClient.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="printingApp.invoice.toOrganization">To Organization</span></dt>
+        <dd>
+          <div *ngIf="invoice.toOrganization">
+            <a [routerLink]="['/p-organization', invoice.toOrganization.id, 'view']">{{ invoice.toOrganization.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/invoice', invoice.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

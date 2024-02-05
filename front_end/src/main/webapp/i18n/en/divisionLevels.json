@@ -1,0 +1,10 @@
+{
+  "printingApp": {
+    "DivisionLevels": {
+      "null": "",
+      "DEPARTMENT": "DEPARTMENT",
+      "UNIT": "UNIT",
+      "SUB_UNIT": "SUB_UNIT"
+    }
+  }
+}

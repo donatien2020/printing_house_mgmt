@@ -1,0 +1,29 @@
+{
+  "printingApp": {
+    "jobCardAssignment": {
+      "home": {
+        "title": "JobCardAssignments",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Job Card Assignment",
+        "createOrEditLabel": "Créer ou éditer un Job Card Assignment",
+        "notFound": "Aucun Job Card Assignment trouvé"
+      },
+      "created": "Un nouveau Job Card Assignment a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Job Card Assignment avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Job Card Assignment avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Job Card Assignment {{ id }} ?"
+      },
+      "detail": {
+        "title": "Job Card Assignment"
+      },
+      "id": "ID",
+      "assignedToId": "Assigned To Id",
+      "assignedNames": "Assigned Names",
+      "description": "Description",
+      "assignmentMode": "Assignment Mode",
+      "status": "Status",
+      "jobCard": "Job Card"
+    }
+  }
+}

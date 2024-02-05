@@ -1,0 +1,10 @@
+{
+  "printingApp": {
+    "JobCardItemStatuses": {
+      "null": "",
+      "USED": "USED",
+      "DELETED": "DELETED",
+      "ADDED": "ADDED"
+    }
+  }
+}

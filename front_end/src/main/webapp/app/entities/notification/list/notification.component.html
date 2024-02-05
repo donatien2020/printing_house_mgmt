@@ -1,0 +1,144 @@
+<div>
+  <h2 id="page-heading" data-cy="NotificationHeading">
+    <span jhiTranslate="printingApp.notification.home.title">Notifications</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="printingApp.notification.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-notification"
+        [routerLink]="['/notification/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="printingApp.notification.home.createLabel"> Create a new Notification </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="notifications?.length === 0">
+    <span jhiTranslate="printingApp.notification.home.notFound">No Notifications found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="notifications && notifications.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="notificationType">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.notification.notificationType">Notification Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="content">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.notification.content">Content</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sentAt">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.notification.sentAt">Sent At</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="product">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.notification.product">Product</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="receiverId">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.notification.receiverId">Receiver Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="receiverNames">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.notification.receiverNames">Receiver Names</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="receiverEmail">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.notification.receiverEmail">Receiver Email</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="receiverType">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.notification.receiverType">Receiver Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.notification.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let notification of notifications; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/notification', notification.id, 'view']">{{ notification.id }}</a>
+          </td>
+          <td jhiTranslate="{{ 'printingApp.NotificationTypes.' + notification.notificationType }}">{{ notification.notificationType }}</td>
+          <td>{{ notification.content }}</td>
+          <td>{{ notification.sentAt | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'printingApp.NotificationProducts.' + notification.product }}">{{ notification.product }}</td>
+          <td>{{ notification.receiverId }}</td>
+          <td>{{ notification.receiverNames }}</td>
+          <td>{{ notification.receiverEmail }}</td>
+          <td jhiTranslate="{{ 'printingApp.NotificationReceivers.' + notification.receiverType }}">{{ notification.receiverType }}</td>
+          <td jhiTranslate="{{ 'printingApp.Status.' + notification.status }}">{{ notification.status }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/notification', notification.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/notification', notification.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(notification)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

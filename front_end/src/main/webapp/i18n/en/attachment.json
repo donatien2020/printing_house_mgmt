@@ -1,0 +1,31 @@
+{
+  "printingApp": {
+    "attachment": {
+      "home": {
+        "title": "Attachments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Attachment",
+        "createOrEditLabel": "Create or edit a Attachment",
+        "notFound": "No Attachments found"
+      },
+      "created": "A new Attachment is created with identifier {{ param }}",
+      "updated": "A Attachment is updated with identifier {{ param }}",
+      "deleted": "A Attachment is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Attachment {{ id }}?"
+      },
+      "detail": {
+        "title": "Attachment"
+      },
+      "id": "ID",
+      "description": "Description",
+      "fileName": "File Name",
+      "pathToFile": "Path To File",
+      "type": "Type",
+      "extension": "Extension",
+      "ownerType": "Owner Type",
+      "ownerId": "Owner Id",
+      "status": "Status"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="locationLevel">
+      <h2 data-cy="locationLevelDetailsHeading"><span jhiTranslate="printingApp.locationLevel.detail.title">Location Level</span>
+      </h2>
+
+      <hr/>
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <!-- <dt><span jhiTranslate="global.field.id">ID</span></dt>
+         <dd>
+           <span>{{ locationLevel.id }}</span>
+         </dd>-->
+        <dt><span jhiTranslate="printingApp.locationLevel.code">Code</span></dt>
+        <dd>
+          <span>{{ locationLevel.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.locationLevel.name">Name</span></dt>
+        <dd>
+          <span>{{ locationLevel.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.locationLevel.createdOn">Created On</span></dt>
+        <dd>
+          <span>{{ locationLevel.createdOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.locationLevel.createdById">Created By Id</span></dt>
+        <dd>
+          <span>{{ locationLevel.createdById }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.locationLevel.createdByUsername">Created By Username</span></dt>
+        <dd>
+          <span>{{ locationLevel.createdByUsername }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.locationLevel.updatedById">Updated By Id</span></dt>
+        <dd>
+          <span>{{ locationLevel.updatedById }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.locationLevel.updatedByUsername">Updated By Username</span></dt>
+        <dd>
+          <span>{{ locationLevel.updatedByUsername }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.locationLevel.updatedOn">Updated On</span></dt>
+        <dd>
+          <span>{{ locationLevel.updatedOn | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+      <!--
+            <button type="button" [routerLink]="['/location-level', locationLevel.id, 'edit']" class="btn btn-primary">
+              <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>-->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+export enum PerformanceMeasures {
+  FIRST_ASSIGNMENT = 'FIRST_ASSIGNMENT',
+
+  SECOND_ASSIGNMENT = 'SECOND_ASSIGNMENT',
+
+  RE_ASSIGNED = 'RE_ASSIGNED',
+}

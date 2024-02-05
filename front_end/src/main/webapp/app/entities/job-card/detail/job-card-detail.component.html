@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="jobCard">
+      <h2 data-cy="jobCardDetailsHeading"><span jhiTranslate="printingApp.jobCard.detail.title">Job Card</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+       <!-- <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ jobCard.id }}</span>
+        </dd>-->
+        <dt><span jhiTranslate="printingApp.jobCard.description">Description</span></dt>
+        <dd>
+          <span>{{ jobCard.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.jobCard.quantity">Quantity</span></dt>
+        <dd>
+          <span>{{ jobCard.quantity }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.jobCard.unitPrice">Unit Price</span></dt>
+        <dd>
+          <span>{{ jobCard.unitPrice }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.jobCard.startedOn">Started On</span></dt>
+        <dd>
+          <span>{{ jobCard.startedOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.jobCard.completedOn">Completed On</span></dt>
+        <dd>
+          <span>{{ jobCard.completedOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.jobCard.divisionId">Division Id</span></dt>
+        <dd>
+          <span>{{ jobCard.divisionId }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.jobCard.divisionName">Division Name</span></dt>
+        <dd>
+          <span>{{ jobCard.divisionName }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.jobCard.performance">Performance</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.PerformanceMeasures.' + jobCard.performance }}">{{ jobCard.performance }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.jobCard.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.JobCardStatuses.' + jobCard.status }}">{{ jobCard.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.jobCard.clientReceptionOrder">Client Reception Order</span></dt>
+        <dd>
+          <div *ngIf="jobCard.clientReceptionOrder">
+            <a [routerLink]="['/client-reception-order', jobCard.clientReceptionOrder.id, 'view']">{{ jobCard.clientReceptionOrder.orderNumber }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/job-card', jobCard.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

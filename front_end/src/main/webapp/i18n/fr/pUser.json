@@ -1,0 +1,33 @@
+{
+  "printingApp": {
+    "pUser": {
+      "home": {
+        "title": "PUsers",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau P User",
+        "createOrEditLabel": "Créer ou éditer un P User",
+        "notFound": "Aucun P User trouvé"
+      },
+      "created": "Un nouveau P User a été créé avec l'identifiant {{ param }}",
+      "updated": "Le P User avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le P User avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le P User {{ id }} ?"
+      },
+      "detail": {
+        "title": "P User"
+      },
+      "id": "ID",
+      "phone": "Phone",
+      "email": "Email",
+      "username": "Username",
+      "password": "Password",
+      "roleName": "Role Name",
+      "organizationId": "Organization Id",
+      "status": "Status",
+      "enrolments": "Enrolments",
+      "role": "Role",
+      "person": "Person"
+    }
+  }
+}

@@ -1,0 +1,235 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-employee-heading" data-cy="EmployeeCreateUpdateHeading" jhiTranslate="printingApp.employee.home.createOrEditLabel">
+        Create or edit a Employee
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <!--<label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>-->
+          <input type="number" class="form-control" name="id" id="field_id" *ngIf="false" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.employee.empNumber" for="field_empNumber">Emp Number</label>
+          <input type="text" class="form-control" name="empNumber" id="field_empNumber" data-cy="empNumber" formControlName="empNumber" />
+          <div *ngIf="editForm.get('empNumber')!.invalid && (editForm.get('empNumber')!.dirty || editForm.get('empNumber')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('empNumber')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.employee.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.employee.phoneNumber" for="field_phoneNumber">Phone Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="phoneNumber"
+            id="field_phoneNumber"
+            data-cy="phoneNumber"
+            formControlName="phoneNumber"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.employee.email" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.employee.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'printingApp.EmploymentStatuses.null' | translate }}</option>
+            <option *ngFor="let employmentStatuses of employmentStatusesValues" [value]="employmentStatuses">
+              {{ 'printingApp.EmploymentStatuses.' + employmentStatuses | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('status')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.employee.startedOn" for="field_startedOn">Started On</label>
+          <div class="d-flex">
+            <input
+              id="field_startedOn"
+              data-cy="startedOn"
+              type="datetime-local"
+              class="form-control"
+              name="startedOn"
+              formControlName="startedOn"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.employee.terminatedOn" for="field_terminatedOn">Terminated On</label>
+          <div class="d-flex">
+            <input
+              id="field_terminatedOn"
+              data-cy="terminatedOn"
+              type="datetime-local"
+              class="form-control"
+              name="terminatedOn"
+              formControlName="terminatedOn"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.employee.empType" for="field_empType">Emp Type</label>
+          <select class="form-control" name="empType" formControlName="empType" id="field_empType" data-cy="empType">
+            <option [ngValue]="null">{{ 'printingApp.EmploymentTypes.null' | translate }}</option>
+            <option *ngFor="let employmentTypes of employmentTypesValues" [value]="employmentTypes">
+              {{ 'printingApp.EmploymentTypes.' + employmentTypes | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('empType')!.invalid && (editForm.get('empType')!.dirty || editForm.get('empType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('empType')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.employee.basePayment" for="field_basePayment">Base Payment</label>
+          <input
+            type="number"
+            class="form-control"
+            name="basePayment"
+            id="field_basePayment"
+            data-cy="basePayment"
+            formControlName="basePayment"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.employee.netPayment" for="field_netPayment">Net Payment</label>
+          <input
+            type="number"
+            class="form-control"
+            name="netPayment"
+            id="field_netPayment"
+            data-cy="netPayment"
+            formControlName="netPayment"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.employee.grossPayment" for="field_grossPayment">Gross Payment</label>
+          <input
+            type="number"
+            class="form-control"
+            name="grossPayment"
+            id="field_grossPayment"
+            data-cy="grossPayment"
+            formControlName="grossPayment"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.employee.paymentPeriod" for="field_paymentPeriod">Payment Period</label>
+          <select
+            class="form-control"
+            name="paymentPeriod"
+            formControlName="paymentPeriod"
+            id="field_paymentPeriod"
+            data-cy="paymentPeriod"
+          >
+            <option [ngValue]="null">{{ 'printingApp.PaymentPeriods.null' | translate }}</option>
+            <option *ngFor="let paymentPeriods of paymentPeriodsValues" [value]="paymentPeriods">
+              {{ 'printingApp.PaymentPeriods.' + paymentPeriods | translate }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              editForm.get('paymentPeriod')!.invalid && (editForm.get('paymentPeriod')!.dirty || editForm.get('paymentPeriod')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('paymentPeriod')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.employee.division" for="field_division">Division</label>
+          <select
+            class="form-control"
+            id="field_division"
+            data-cy="division"
+            name="division"
+            formControlName="division"
+            [compareWith]="compareDivision"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="divisionOption" *ngFor="let divisionOption of divisionsSharedCollection">{{ divisionOption.name }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.employee.person" for="field_person">Person</label>
+          <select
+            class="form-control"
+            id="field_person"
+            data-cy="person"
+            name="person"
+            formControlName="person"
+            [compareWith]="comparePerson"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="personOption" *ngFor="let personOption of peopleSharedCollection">{{ personOption.firstName }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

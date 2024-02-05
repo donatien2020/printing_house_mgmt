@@ -1,0 +1,34 @@
+{
+  "printingApp": {
+    "client": {
+      "home": {
+        "title": "Clients",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Client",
+        "createOrEditLabel": "Créer ou éditer un Client",
+        "notFound": "Aucun Client trouvé"
+      },
+      "created": "Un nouveau Client a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Client avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Client avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Client {{ id }} ?"
+      },
+      "detail": {
+        "title": "Client"
+      },
+      "id": "ID",
+      "clientType": "Client Type",
+      "engagementMode": "Engagement Mode",
+      "address": "Address",
+      "currentContractId": "Current Contract Id",
+      "contactPhoneNumber": "Contact Phone Number",
+      "organizationId": "Organization Id",
+      "orders": "Orders",
+      "invoices": "Invoices",
+      "person": "Person",
+      "company": "Company",
+      "residenceLocation": "Residence Location"
+    }
+  }
+}

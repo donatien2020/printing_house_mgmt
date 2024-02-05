@@ -1,0 +1,9 @@
+{
+  "printingApp": {
+    "ContractAcquiringStatuses": {
+      "null": "",
+      "NEW": "NEW",
+      "RENEWED": "RENEWED"
+    }
+  }
+}

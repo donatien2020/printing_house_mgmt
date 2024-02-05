@@ -1,0 +1,31 @@
+{
+  "printingApp": {
+    "debtor": {
+      "home": {
+        "title": "Debtors",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Debtor",
+        "createOrEditLabel": "Créer ou éditer un Debtor",
+        "notFound": "Aucun Debtor trouvé"
+      },
+      "created": "Un nouveau Debtor a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Debtor avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Debtor avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Debtor {{ id }} ?"
+      },
+      "detail": {
+        "title": "Debtor"
+      },
+      "id": "ID",
+      "serviceDescription": "Service Description",
+      "productDescription": "Product Description",
+      "debtDate": "Debt Date",
+      "debtStatus": "Debt Status",
+      "invoicingStatus": "Invoicing Status",
+      "totalAmount": "Total Amount",
+      "paidAmount": "Paid Amount",
+      "supplier": "Supplier"
+    }
+  }
+}

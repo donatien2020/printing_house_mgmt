@@ -1,0 +1,13 @@
+export enum NotificationProducts {
+  ORDER = 'ORDER',
+
+  INVOICE = 'INVOICE',
+
+  BILL = 'BILL',
+
+  ACCOUNT = 'ACCOUNT',
+
+  PAYROLL = 'PAYROLL',
+
+  FINANCIAL_CLIENT_ENGAGEMENT = 'FINANCIAL_CLIENT_ENGAGEMENT',
+}

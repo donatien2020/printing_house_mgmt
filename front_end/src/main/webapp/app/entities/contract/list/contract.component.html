@@ -1,0 +1,153 @@
+<div>
+  <h2 id="page-heading" data-cy="ContractHeading">
+    <span jhiTranslate="printingApp.contract.home.title">Contracts</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="printingApp.contract.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-contract"
+        [routerLink]="['/contract/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="printingApp.contract.home.createLabel"> Create a new Contract </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="contracts?.length === 0">
+    <span jhiTranslate="printingApp.contract.home.notFound">No Contracts found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="contracts && contracts.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <!--<th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>-->
+
+          <th scope="col" jhiSortBy="contractNumber">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.contract.contractNumber">Contract Number</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="contractType">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.contract.contractType">Contract Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.contract.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="validFrom">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.contract.validFrom">Valid From</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="validTo">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.contract.validTo">Valid To</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.contract.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+         <!-- <th scope="col" jhiSortBy="currentAttachmentId">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.contract.currentAttachmentId">Current Attachment Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ownerId">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.contract.ownerId">Owner Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>-->
+          <th scope="col" jhiSortBy="ownerType">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.contract.ownerType">Owner Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="acquiringStatus">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.contract.acquiringStatus">Acquiring Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contract of contracts; trackBy: trackId" data-cy="entityTable">
+         <!-- <td>
+            <a [routerLink]="['/contract', contract.id, 'view']">{{ contract.id }}</a>
+          </td>-->
+
+          <td><a [routerLink]="['/contract', contract.id, 'view']">{{ contract.contractNumber }}</a></td>
+          <td jhiTranslate="{{ 'printingApp.ContractTypes.' + contract.contractType }}">{{ contract.contractType }}</td>
+          <td>{{ contract.description }}</td>
+          <td>{{ contract.validFrom | formatMediumDatetime }}</td>
+          <td>{{ contract.validTo | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'printingApp.Status.' + contract.status }}">{{ contract.status }}</td>
+          <td>{{ contract.currentAttachmentId }}</td>
+          <td>{{ contract.ownerId }}</td>
+          <td jhiTranslate="{{ 'printingApp.ContractOwnerTypes.' + contract.ownerType }}">{{ contract.ownerType }}</td>
+          <td jhiTranslate="{{ 'printingApp.ContractAcquiringStatuses.' + contract.acquiringStatus }}">{{ contract.acquiringStatus }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/contract', contract.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/contract', contract.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(contract)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

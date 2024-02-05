@@ -1,0 +1,37 @@
+{
+  "printingApp": {
+    "invoice": {
+      "home": {
+        "title": "Invoices",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Invoice",
+        "createOrEditLabel": "Create or edit a Invoice",
+        "notFound": "No Invoices found"
+      },
+      "created": "A new Invoice is created with identifier {{ param }}",
+      "updated": "A Invoice is updated with identifier {{ param }}",
+      "deleted": "A Invoice is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Invoice {{ id }}?"
+      },
+      "detail": {
+        "title": "Invoice"
+      },
+      "id": "ID",
+      "invoiceNumber": "Invoice Number",
+      "totalJobCards": "Total Job Cards",
+      "totalCost": "Total Cost",
+      "paymentMode": "Payment Mode",
+      "paymentType": "Payment Type",
+      "invoiceType": "Invoice Type",
+      "status": "Status",
+      "receptionOrderId": "Reception Order Id",
+      "invoicedOn": "Invoiced On",
+      "dueOn": "Due On",
+      "fromOrganizationId": "From Organization Id",
+      "debtor": "Debtor",
+      "invoiceToClient": "Invoice To Client",
+      "toOrganization": "To Organization"
+    }
+  }
+}

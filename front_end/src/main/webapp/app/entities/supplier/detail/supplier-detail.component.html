@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="supplier">
+      <h2 data-cy="supplierDetailsHeading"><span jhiTranslate="printingApp.supplier.detail.title">Supplier</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+       <!-- <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ supplier.id }}</span>
+        </dd>-->
+        <dt><span jhiTranslate="printingApp.supplier.address">Address</span></dt>
+        <dd>
+          <span>{{ supplier.address }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.supplier.phoneNumber">Phone Number</span></dt>
+        <dd>
+          <span>{{ supplier.phoneNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.supplier.description">Description</span></dt>
+        <dd>
+          <span>{{ supplier.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.supplier.specialization">Specialization</span></dt>
+        <dd>
+          <span>{{ supplier.specialization }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.supplier.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.Status.' + supplier.status }}">{{ supplier.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.supplier.company">Company</span></dt>
+        <dd>
+          <div *ngIf="supplier.company">
+            <a [routerLink]="['/company', supplier.company.id, 'view']">{{ supplier.company.companyNames }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/supplier', supplier.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+{
+  "printingApp": {
+    "NotificationReceivers": {
+      "null": "",
+      "CLIENT": "CLIENT",
+      "ORGANIZATION": "ORGANIZATION",
+      "USER": "USER",
+      "EMPLOYEE": "EMPLOYEE"
+    }
+  }
+}

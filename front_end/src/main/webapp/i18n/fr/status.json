@@ -1,0 +1,10 @@
+{
+  "printingApp": {
+    "Status": {
+      "null": "",
+      "ACTIVE": "ACTIVE",
+      "INACTIVE": "INACTIVE",
+      "DELETED": "DELETED"
+    }
+  }
+}

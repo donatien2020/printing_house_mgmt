@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="receipt">
+      <h2 data-cy="receiptDetailsHeading"><span jhiTranslate="printingApp.receipt.detail.title">Receipt</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ receipt.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.receipt.invoiceId">Invoice Id</span></dt>
+        <dd>
+          <span>{{ receipt.invoiceId }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.receipt.totalCost">Total Cost</span></dt>
+        <dd>
+          <span>{{ receipt.totalCost }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.receipt.totalPaid">Total Paid</span></dt>
+        <dd>
+          <span>{{ receipt.totalPaid }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.receipt.balance">Balance</span></dt>
+        <dd>
+          <span>{{ receipt.balance }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.receipt.paymentDate">Payment Date</span></dt>
+        <dd>
+          <span>{{ receipt.paymentDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.receipt.receivedByNames">Received By Names</span></dt>
+        <dd>
+          <span>{{ receipt.receivedByNames }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/receipt', receipt.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+{
+  "printingApp": {
+    "jobCardAssignment": {
+      "home": {
+        "title": "Job Card Assignments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Job Card Assignment",
+        "createOrEditLabel": "Create or edit a Job Card Assignment",
+        "notFound": "No Job Card Assignments found"
+      },
+      "created": "A new Job Card Assignment is created with identifier {{ param }}",
+      "updated": "A Job Card Assignment is updated with identifier {{ param }}",
+      "deleted": "A Job Card Assignment is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Job Card Assignment {{ id }}?"
+      },
+      "detail": {
+        "title": "Job Card Assignment"
+      },
+      "id": "ID",
+      "assignedToId": "Assigned To Id",
+      "assignedNames": "Assigned Names",
+      "description": "Description",
+      "assignmentMode": "Assignment Mode",
+      "status": "Status",
+      "jobCard": "Job Card"
+    }
+  }
+}

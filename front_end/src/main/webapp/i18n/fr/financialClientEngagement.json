@@ -1,0 +1,30 @@
+{
+  "printingApp": {
+    "financialClientEngagement": {
+      "home": {
+        "title": "FinancialClientEngagements",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Financial Client Engagement",
+        "createOrEditLabel": "Créer ou éditer un Financial Client Engagement",
+        "notFound": "Aucun Financial Client Engagement trouvé"
+      },
+      "created": "Un nouveau Financial Client Engagement a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Financial Client Engagement avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Financial Client Engagement avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Financial Client Engagement {{ id }} ?"
+      },
+      "detail": {
+        "title": "Financial Client Engagement"
+      },
+      "id": "ID",
+      "userId": "User Id",
+      "clientId": "Client Id",
+      "clientNames": "Client Names",
+      "discussionSummary": "Discussion Summary",
+      "reason": "Reason",
+      "conclusion": "Conclusion",
+      "contractId": "Contract Id"
+    }
+  }
+}

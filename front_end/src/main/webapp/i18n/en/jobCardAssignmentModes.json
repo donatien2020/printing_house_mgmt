@@ -1,0 +1,11 @@
+{
+  "printingApp": {
+    "JobCardAssignmentModes": {
+      "null": "",
+      "FIRST": "FIRST",
+      "REDO": "REDO",
+      "DISQUALIFIED": "DISQUALIFIED",
+      "INTERVENED": "INTERVENED"
+    }
+  }
+}

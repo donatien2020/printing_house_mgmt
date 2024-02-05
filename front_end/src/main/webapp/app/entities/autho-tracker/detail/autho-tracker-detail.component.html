@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="authoTracker">
+      <h2 data-cy="authoTrackerDetailsHeading"><span jhiTranslate="printingApp.authoTracker.detail.title">Autho Tracker</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ authoTracker.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.authoTracker.username">Username</span></dt>
+        <dd>
+          <span>{{ authoTracker.username }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.authoTracker.token">Token</span></dt>
+        <dd>
+          <span>{{ authoTracker.token }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.authoTracker.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.Status.' + authoTracker.status }}">{{ authoTracker.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.authoTracker.logedInOn">Loged In On</span></dt>
+        <dd>
+          <span>{{ authoTracker.logedInOn | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/autho-tracker', authoTracker.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

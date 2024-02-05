@@ -1,0 +1,9 @@
+export enum ContractTypes {
+  PURCHASE = 'PURCHASE',
+
+  EMPLOYMENT = 'EMPLOYMENT',
+
+  FRAME_WORKS_SALES = 'FRAME_WORKS_SALES',
+
+  NORMAL_SALES = 'NORMAL_SALES',
+}

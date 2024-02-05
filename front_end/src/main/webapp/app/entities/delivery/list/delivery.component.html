@@ -1,0 +1,145 @@
+<div>
+  <h2 id="page-heading" data-cy="DeliveryHeading">
+    <span jhiTranslate="printingApp.delivery.home.title">Deliveries</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="printingApp.delivery.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-delivery"
+        [routerLink]="['/delivery/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="printingApp.delivery.home.createLabel"> Create a new Delivery </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="deliveries?.length === 0">
+    <span jhiTranslate="printingApp.delivery.home.notFound">No Deliveries found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="deliveries && deliveries.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <!--<th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>-->
+          <th scope="col" jhiSortBy="orderId">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.delivery.order">Order</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+
+          <th scope="col" jhiSortBy="delivererId">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.delivery.deliverer">Deliverer</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="deliveryNote">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.delivery.deliveryNote">Delivery Note</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="receiverClientId">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.delivery.receiverClient">Receiver Client</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="attachmentId">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.delivery.attachment">Attachment</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="deliveryDate">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.delivery.deliveryDate">Delivery Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="deliveryAddress">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.delivery.deliveryAddress">Delivery Address</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="deliveryLocationId">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.delivery.deliveryLocation">Delivery Location</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.delivery.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let delivery of deliveries; trackBy: trackId" data-cy="entityTable">
+         <!-- <td>
+            <a [routerLink]="['/delivery', delivery.id, 'view']">{{ delivery.id }}</a>
+          </td>-->
+          <td>{{ delivery.receiptionOrder?.orderNumber }}</td>
+          <td>{{ delivery.delivererId }}</td>
+          <td>{{ delivery.deliveryNote }}</td>
+          <td>{{ delivery.receiverClientId }}</td>
+          <td>{{ delivery.document?.fileName }}</td>
+          <td>{{ delivery.deliveryDate | formatMediumDatetime }}</td>
+          <td>{{ delivery.deliveryAddress }}</td>
+          <td>{{ delivery.location?.name }}</td>
+          <td jhiTranslate="{{ 'printingApp.DeliveryStatuses.' + delivery.status }}">{{ delivery.status }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/delivery', delivery.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/delivery', delivery.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(delivery)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+export enum InvoicePaymentModes {
+  MOBILE_MONEY = 'MOBILE_MONEY',
+
+  BANK_TRANSFER = 'BANK_TRANSFER',
+
+  CHECK_DEPOSIT = 'CHECK_DEPOSIT',
+
+  CASH = 'CASH',
+}

@@ -1,0 +1,10 @@
+{
+  "printingApp": {
+    "ContractOwnerTypes": {
+      "null": "",
+      "CLIENT": "CLIENT",
+      "EMPLOYEE": "EMPLOYEE",
+      "DEBTOR": "DEBTOR"
+    }
+  }
+}

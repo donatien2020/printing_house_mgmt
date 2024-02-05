@@ -1,0 +1,9 @@
+{
+  "printingApp": {
+    "EnrollmentStatus": {
+      "null": "",
+      "ENROLLED": "ENROLLED",
+      "REMOVED": "REMOVED"
+    }
+  }
+}

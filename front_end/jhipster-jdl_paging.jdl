@@ -1,0 +1,558 @@
+
+entity Attachment {
+  description String
+  fileName String
+  pathToFile String
+  type FileTypes
+  extension FileExtensions
+  ownerType FileOwnerTypes
+  ownerId Long
+  status Status
+}
+entity AuthoTracker {
+  username String
+  token String 
+  status Status
+  logedInOn ZonedDateTime
+}
+
+entity Client {
+  //person Person,
+  //company Company,
+  clientType ClientTypes required
+  engagementMode EngagementModes required
+  //residenceLocation Location,
+  address String
+  currentContractId Long
+  contactPhoneNumber String
+  organizationId Long required
+}
+
+
+entity ClientReceptionOrder {
+  
+  orderNumber String required
+  //client Client
+  //assignedToEmployee Employee,
+  divisionId Long required
+  receivedOn ZonedDateTime
+  receptionMode ClientReceptionModes required
+  jobDescription String
+  totalCost Double
+  totalJobCards Long
+  deliveryDate ZonedDateTime
+  assignedToDivisionNames Long required
+  assignedToEmployeeNames Long required
+  orderingStatus OrderStatuses required
+  invoicingStatus InvoicingStatuses required
+}
+
+entity Company {
+
+  companyNames String unique required
+  tinNumber String unique required
+  description String
+  status Status
+}
+entity Supplier  {
+  //company Company,
+  address String required
+  phoneNumber String required
+  description String required
+  specialization String required
+  status Status required
+}
+entity Contract  {
+  contractType ContractTypes required
+  contractNumber String required unique
+  description String
+  validFrom ZonedDateTime
+  validTo ZonedDateTime
+  status Status required
+  currentAttachmentId Long
+  ownerId Long required
+  ownerType ContractOwnerTypes required
+  acquiringStatus ContractAcquiringStatuses required
+}
+
+entity Debtor {
+  //supplier Supplier,
+  // bill Invoice onetoone
+  serviceDescription String
+  productDescription String
+  debtDate ZonedDateTime
+  debtStatus DebtStatuses required
+  invoicingStatus DebtInvoicingStatuses required
+  totalAmount Double
+  paidAmount Double
+ 
+}
+entity Delivery {
+  orderId Long required
+  orderNumber Long required
+  delivererId Long required
+  DeliveryNote String
+  receiverClientId Long required
+  attachmentId Long
+  deliveryDate ZonedDateTime
+  deliveryAddress String
+  deliveryLocationId Long
+  status DeliveryStatuses required
+}
+entity Division  {
+//parent Division,
+ // organization Organization,
+  name String
+  description String
+  level DivisionLevels required
+  divisionType DivisionTypes required
+  status Status required
+}
+entity Employee {
+  //division Division,
+  //person Person,
+  empNumber String unique required
+  description String
+  phoneNumber String
+  email String
+  status EmploymentStatuses required
+  startedOn ZonedDateTime
+  terminatedOn ZonedDateTime
+  empType EmploymentTypes required
+  basePayment Double
+  netPayment Double
+  grossPayment Double
+  paymentPeriod PaymentPeriods required
+}
+
+entity FinancialClientEngagement {
+  userId Long required
+  clientId Long required 
+  clientNames Long required
+  discussionSummary String
+  reason EngagementReasons required
+  conclusion String
+  contractId Long
+}
+
+entity Invoice  {
+// invoiceToClient Client,
+ //toOrganization Organization,
+ //debtor Debtor onetoone
+  invoiceNumber String required
+  totalJobCards Long
+  totalCost Double required
+  paymentMode InvoicePaymentModes required
+  paymentType PaymentTypes required
+  invoiceType InvoiceTypes required
+  status InvoicingStatuses required
+  receptionOrderId Long required
+  invoicedOn ZonedDateTime
+  dueOn ZonedDateTime
+  fromOrganizationId Long required
+ 
+}
+entity InvoiceHistory  {
+  invoiceId Long required
+  action InvoiceActions required
+  description String required
+  doneOn ZonedDateTime required
+}
+
+entity InvoiceItem  {
+  itemId Long required
+  invoiceId Long required
+  itemType InvoiceItemTypes required
+  unitPrice Double required
+  quantity Long required
+  totalCost Double required
+  status Status required
+}
+
+entity Receipt  {
+  invoiceId Long required
+  totalCost Double required
+  totalPaid Double required
+  balance Double required
+  paymentDate ZonedDateTime required
+  receivedByNames String required
+  
+}
+entity JobCard  {
+  //clientReceptionOrder ClientReceptionOrder
+  description String
+  quantity Long required
+  unitPrice Double required
+  startedOn ZonedDateTime 
+  completedOn ZonedDateTime
+  divisionId Long required
+  divisionName Long required
+  performance PerformanceMeasures required
+  status JobCardStatuses required
+}
+entity JobCardAssignment  {
+ // jobCard JobCard,
+  assignedToId Long required
+  assignedNames Long required
+  description String required
+  assignmentMode JobCardAssignmentModes required
+  status JobCardAssignmentStatuses required
+}
+entity JobCardItem  {
+  //card JobCard,
+  //product Product,
+  quantity Long required,
+  unitPrice Double required,
+  status JobCardItemStatuses required
+}
+
+entity Location {
+ //parent Location,
+ //level LocationLevel
+  code String required
+  name String required
+  description String
+  createdOn ZonedDateTime 
+  createdById Long 
+  createdByUsername String 
+  updatedById Long
+  updatedByUsername String
+  updatedOn ZonedDateTime
+}
+
+entity LocationLevel  {
+  code String required
+  name String required
+  createdOn ZonedDateTime
+  createdById Long 
+  createdByUsername String 
+  updatedById Long
+  updatedByUsername String
+  updatedOn ZonedDateTime
+}
+
+entity Notification  {
+  notificationType NotificationTypes required
+  content String required
+  sentAt ZonedDateTime
+  product NotificationProducts required
+  receiverId Long required
+  receiverNames Long required
+  receiverEmail String required
+  receiverType NotificationReceivers required
+  status Status required
+}
+entity POrganization  {
+  //company Company,
+  //officeLocation Location,
+  //parent Organization,
+  officeAddress String required
+  description String required
+  profileID Long
+  companyType CompanyTypes required,
+  status Status required
+}
+
+entity PayRoll  {
+  organizationId Long required
+  payFrom LocalDate required
+  payTo LocalDate required
+  status PaymentStatuses required
+  totalGrossAmount Double required
+  totalNetAmount Double required
+}
+
+entity PayRollItem {
+  //payRoll PayRoll,
+  divisionId Long required
+  empId Long required
+  empNumber String required
+  netAmount Double required
+  grossAmount Double required
+  collectionStatus SalaryCollectionStatuses required
+  collectionDate ZonedDateTime required
+  computationDate ZonedDateTime required
+}
+
+entity Person {
+//birthLocation Location
+  nid String unique required
+  docType DocumentTypes required
+  firstName String
+  lastName String
+  gender Genders required
+  birthDate LocalDate
+  birthAddress String
+  status Status required
+}
+
+entity PPrivilege {
+  name String unique required
+  description String required
+  status Status required
+}
+
+entity PRole  {
+  name RoleNames required
+  description String required
+  status Status required
+}
+entity RolePrivilege  {
+//role Role,
+  //privilege Privilege
+  status Status required
+  assignedOn ZonedDateTime required
+  assignedById Long required
+  assignedByUsername String required
+  
+}
+
+entity PUser {
+//role Role,
+  //person Person,
+  phone String  required
+  email String  required,
+  username String unique required,
+  password String required
+  roleName String required,
+  organizationId Long required,
+  status Status
+}
+
+entity UserDivisionEnrolment {
+  startedOn ZonedDateTime required
+  endedOn ZonedDateTime
+  status EnrollmentStatus required
+}
+
+
+entity Product  {
+  categoryId Long required
+  organizationId Long required
+  categoryName String required
+  code String unique required
+  name String required
+  description String required
+  unitSalesPrice Double required
+  unitPurchaseCost Double required
+  status Status required
+}
+entity ProductCategory  {
+  name String unique required
+  description String required
+  statu Status required
+  //parent ProductCategory
+  parentName String
+}
+
+enum EnrollmentStatus {
+  ENROLLED, REMOVED
+}
+enum RoleNames {
+    SUPPER_ADMIN, ADMIN, ACCOUNTANT, RECOVERER, DELIVELER, STOREMAN, TECNITIAN, SUPPORT, MONITORING
+}
+enum DocumentTypes {
+    NID, PASSPORT, NA
+}
+
+enum Genders {
+    MALE, FEMALE
+}
+enum SalaryCollectionStatuses {
+    COMPUTED, COLLECTED, LOCKED
+}
+enum PaymentStatuses {
+    INITIAL, APPROVED, SUSPENDED, CANCELED, PAID
+}
+enum CompanyTypes {
+    PROVIDER, RESELLER, CLIENT
+}
+enum NotificationTypes {
+    E_MAIL, SMS
+}
+
+enum NotificationProducts {
+    ORDER, INVOICE, BILL, ACCOUNT, PAYROLL, FINANCIAL_CLIENT_ENGAGEMENT
+}
+
+enum NotificationReceivers {
+  CLIENT, ORGANIZATION, USER, EMPLOYEE
+}
+enum JobCardItemStatuses {
+   USED, DELETED, ADDED
+}
+enum JobCardAssignmentModes {
+    FIRST, REDO, DISQUALIFIED, INTERVENED
+}
+
+enum JobCardAssignmentStatuses {
+ASSIGNED, CANCELED, DE_ASSIGENED, RE_ASSIGNED
+}
+enum PerformanceMeasures {
+    FIRST_ASSIGNMENT, SECOND_ASSIGNMENT, RE_ASSIGNED
+}
+
+enum JobCardStatuses {
+    ASSIGNED, STARTED, CANCELED, COMPLETED
+}
+enum InvoiceItemTypes {
+    JOB_CARD, PRODUCT, SERVICE
+}
+enum InvoiceActions {
+    CREATION , MODIFICATION, INVOICING, CANCELLATION, REFUNDING
+}
+enum InvoicePaymentModes {
+    MOBILE_MONEY, BANK_TRANSFER, CHECK_DEPOSIT, CASH
+}
+
+enum PaymentTypes {
+    INSTANT, CREDIT
+}
+
+enum InvoiceTypes {
+    PURCHASE, SALES, REFUND, REVERSAL, BILL
+}
+
+enum InvoicingStatuses {
+    INITIAL, CANCELED, INVOICED, PAID, REVERSED, REFUNDED
+}
+enum EngagementReasons {
+    CONTRACT_RENEWAL, INVOICING, RECOVERY, MARKETING
+}
+enum EmploymentStatuses {
+    RECRUITED, ACTIVE, SUSPENDED, DISMISSED
+}
+
+enum EmploymentTypes {
+ CONTRACTUAL, CASUAL
+ }
+
+enum PaymentPeriods {
+HOURLY, DAILY, MONTHLY
+}
+enum DivisionLevels {
+DEPARTMENT, UNIT, SUB_UNIT
+}
+enum DivisionTypes {
+ADMINISTRATION , PRODUCTION, FINANCE, DELIVERY, RECOVERY
+}
+enum DeliveryStatuses {
+INITIATED, ASSIGNED, SHIPPING, DELIVERED, CANCELED
+}
+enum DebtStatuses {
+REQUESTED, RECEIVED, PAID, CANCELED
+}
+
+enum DebtInvoicingStatuses {
+INVOICED, PENDING
+}
+
+enum ContractTypes {
+PURCHASE, EMPLOYMENT, FRAME_WORKS_SALES, NORMAL_SALES
+}
+
+enum ContractOwnerTypes {
+ CLIENT, EMPLOYEE, DEBTOR
+}
+
+enum ContractAcquiringStatuses {
+NEW, RENEWED
+}
+
+enum ClientReceptionModes {
+ QUOTATION, ORDER_FORM, LOCAL_PURCHASE_ORDER
+}
+
+enum OrderStatuses {
+ ASSIGNED, STARTED, CANCELED, COMPLETED
+}
+
+enum InvoicingStatuses {
+INITIAL, CANCELED, INVOICED , PAID , REVERSED , REFUNDED
+}
+
+enum FileTypes {
+  IMAGE, VIDEO, DOCUMENT
+}
+
+enum FileExtensions {
+  XLS, XLSX, DOC, DOCX, PDF, PNG, JPEG
+}
+
+enum FileOwnerTypes {
+  ORGANIZATION, CLIENT, DELIVERY, PRODUCT, USER, CONTRACT
+}
+enum ClientTypes {
+  COMPANY, INDIVIDUAL
+}
+
+enum EngagementModes {
+  CONTRACTUAL, PASSENGER
+  }
+
+enum Status {
+  ACTIVE, INACTIVE, DELETED
+}
+
+enum Language {
+    FRENCH, ENGLISH, SWAHILI, KINYARWANDA
+}
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+
+	Person{clients} to  Client{person} 
+	Company{clients} to  Client {company}
+	Location{clients} to  Client {residenceLocation}
+	Client{orders} to ClientReceptionOrder{client}
+	Employee{orders} to ClientReceptionOrder{assignedToEmployee}
+	Company{supliers} to Supplier {company}
+	Supplier{debtors} to Debtor{Supplier}
+    Division{childreen} to Division{parent}
+    POrganization{divisions} to Division{organization}
+    Division{emplyees} to  Employee {division}
+    Person{employees} to  Employee{person}
+    Client{invoices} to Invoice {invoiceToClient}
+    POrganization{invoices} to Invoice {toOrganization}
+    ClientReceptionOrder{jobCards} to JobCard{clientReceptionOrder}
+    JobCard{assignments} to JobCardAssignment{jobCard}
+    JobCard{cardItems} to JobCardItem{card}
+    Product{cardItems} to JobCardItem{product}
+    Location{childreen} to Location{parent}
+    LocationLevel{locations} to Location{level}
+    Company{organizations} to POrganization{company}
+    Location{organizations} to POrganization{officeLocation}
+    POrganization{childreen} to POrganization{parent}
+    PayRoll{items} to PayRollItem{payRoll}
+    Location{persons} to Person{birthLocation}
+    PRole{privileges} to RolePrivilege{role}
+    PPrivilege{roles} to RolePrivilege{privilege}
+    PRole{users} to PUser{role}
+    Person{users} to PUser{person}
+    PUser{enrolments} to UserDivisionEnrolment{user}
+    Division{users} to UserDivisionEnrolment{division}
+    ProductCategory{childreen} to ProductCategory{parent}
+	
+}
+
+relationship OneToOne{
+Invoice {debtor} to Debtor 
+}
+
+
+
+
+// Set pagination options
+//paginate PUser, Employee, Client, JobCard, Product, POrganization, INVOICE with infinite-scroll
+
+paginate PUser, Employee, Client, JobCard, Product, POrganization, INVOICE with pagination
+
+
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

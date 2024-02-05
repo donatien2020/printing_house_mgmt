@@ -1,0 +1,206 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-delivery-heading" data-cy="DeliveryCreateUpdateHeading" jhiTranslate="printingApp.delivery.home.createOrEditLabel">
+        Create or edit a Delivery
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label *ngIf="false" class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number"  *ngIf="false" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.delivery.order" for="field_orderId">Order</label>
+          <select
+            class="form-control"
+            id="field_orderId"
+            data-cy="receiptionOrder"
+            name="receiptionOrder"
+            formControlName="receiptionOrder"
+            [compareWith]="compareClientOrder"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="orderOption" *ngFor="let orderOption of ordersSharedCollection">{{ orderOption.orderNumber }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.delivery.deliverer" for="field_delivererId">Deliverer</label>
+          <input
+            type="number"
+            class="form-control"
+            name="delivererId"
+            id="field_delivererId"
+            data-cy="delivererId"
+            formControlName="delivererId"
+          />
+          <div *ngIf="editForm.get('delivererId')!.invalid && (editForm.get('delivererId')!.dirty || editForm.get('delivererId')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('delivererId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('delivererId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.delivery.deliveryNote" for="field_deliveryNote">Delivery Note</label>
+          <input
+            type="text"
+            class="form-control"
+            name="deliveryNote"
+            id="field_deliveryNote"
+            data-cy="deliveryNote"
+            formControlName="deliveryNote"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.delivery.receiverClient" for="field_receiverClientId"
+            >Receiver Client</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="receiverClientId"
+            id="field_receiverClientId"
+            data-cy="receiverClientId"
+            formControlName="receiverClientId"
+          />
+          <div
+            *ngIf="
+              editForm.get('receiverClientId')!.invalid &&
+              (editForm.get('receiverClientId')!.dirty || editForm.get('receiverClientId')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('receiverClientId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('receiverClientId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.delivery.attachment" for="field_documentId">Attachment</label>
+          <select
+            class="form-control"
+            id="field_documentId"
+            data-cy="document"
+            name="document"
+            formControlName="document"
+            [compareWith]="compareDocument"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="attachmentOption" *ngFor="let attachmentOption of documentsSharedCollection">{{ attachmentOption.fileName }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.delivery.deliveryDate" for="field_deliveryDate">Delivery Date</label>
+          <div class="d-flex">
+            <input
+              id="field_deliveryDate"
+              data-cy="deliveryDate"
+              type="datetime-local"
+              class="form-control"
+              name="deliveryDate"
+              formControlName="deliveryDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.delivery.deliveryAddress" for="field_deliveryAddress">Delivery Address</label>
+          <input
+            type="text"
+            class="form-control"
+            name="deliveryAddress"
+            id="field_deliveryAddress"
+            data-cy="deliveryAddress"
+            formControlName="deliveryAddress"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.delivery.deliveryLocation" for="field_deliveryLocationId"
+            >Delivery Location</label
+          >
+          <select
+            class="form-control"
+            id="field_deliveryLocationId"
+            data-cy="location"
+            name="location"
+            formControlName="location"
+            [compareWith]="compareLocation"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="locationOption" *ngFor="let locationOption of locationsSharedCollection">{{ locationOption.name }}</option>
+          </select>
+        </div>
+
+
+
+
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="printingApp.delivery.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'printingApp.DeliveryStatuses.null' | translate }}</option>
+            <option *ngFor="let deliveryStatuses of deliveryStatusesValues" [value]="deliveryStatuses">
+              {{ 'printingApp.DeliveryStatuses.' + deliveryStatuses | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('status')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

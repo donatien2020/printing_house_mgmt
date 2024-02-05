@@ -1,0 +1,35 @@
+{
+  "printingApp": {
+    "person": {
+      "home": {
+        "title": "People",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Person",
+        "createOrEditLabel": "Create or edit a Person",
+        "notFound": "No People found"
+      },
+      "created": "A new Person is created with identifier {{ param }}",
+      "updated": "A Person is updated with identifier {{ param }}",
+      "deleted": "A Person is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Person {{ id }}?"
+      },
+      "detail": {
+        "title": "Person"
+      },
+      "id": "ID",
+      "nid": "Nid",
+      "docType": "Doc Type",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "gender": "Gender",
+      "birthDate": "Birth Date",
+      "birthAddress": "Birth Address",
+      "status": "Status",
+      "clients": "Clients",
+      "employees": "Employees",
+      "users": "Users",
+      "birthLocation": "Birth Location"
+    }
+  }
+}

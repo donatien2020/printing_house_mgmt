@@ -1,0 +1,29 @@
+{
+  "printingApp": {
+    "receipt": {
+      "home": {
+        "title": "Receipts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Receipt",
+        "createOrEditLabel": "Create or edit a Receipt",
+        "notFound": "No Receipts found"
+      },
+      "created": "A new Receipt is created with identifier {{ param }}",
+      "updated": "A Receipt is updated with identifier {{ param }}",
+      "deleted": "A Receipt is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Receipt {{ id }}?"
+      },
+      "detail": {
+        "title": "Receipt"
+      },
+      "id": "ID",
+      "invoiceId": "Invoice Id",
+      "totalCost": "Total Cost",
+      "totalPaid": "Total Paid",
+      "balance": "Balance",
+      "paymentDate": "Payment Date",
+      "receivedByNames": "Received By Names"
+    }
+  }
+}

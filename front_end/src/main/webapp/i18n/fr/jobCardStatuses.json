@@ -1,0 +1,11 @@
+{
+  "printingApp": {
+    "JobCardStatuses": {
+      "null": "",
+      "ASSIGNED": "ASSIGNED",
+      "STARTED": "STARTED",
+      "CANCELED": "CANCELED",
+      "COMPLETED": "COMPLETED"
+    }
+  }
+}

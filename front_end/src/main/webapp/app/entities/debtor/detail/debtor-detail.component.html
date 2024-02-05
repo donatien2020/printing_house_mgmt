@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="debtor">
+      <h2 data-cy="debtorDetailsHeading"><span jhiTranslate="printingApp.debtor.detail.title">Debtor</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <!--<dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ debtor.id }}</span>
+        </dd>-->
+        <dt><span jhiTranslate="printingApp.debtor.serviceDescription">Service Description</span></dt>
+        <dd>
+          <span>{{ debtor.serviceDescription }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.debtor.productDescription">Product Description</span></dt>
+        <dd>
+          <span>{{ debtor.productDescription }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.debtor.debtDate">Debt Date</span></dt>
+        <dd>
+          <span>{{ debtor.debtDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.debtor.debtStatus">Debt Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.DebtStatuses.' + debtor.debtStatus }}">{{ debtor.debtStatus }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.debtor.invoicingStatus">Invoicing Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.DebtInvoicingStatuses.' + debtor.invoicingStatus }}">{{ debtor.invoicingStatus }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.debtor.totalAmount">Total Amount</span></dt>
+        <dd>
+          <span>{{ debtor.totalAmount }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.debtor.paidAmount">Paid Amount</span></dt>
+        <dd>
+          <span>{{ debtor.paidAmount }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.debtor.supplier">Supplier</span></dt>
+        <dd>
+          <div *ngIf="debtor.supplier">
+            <a [routerLink]="['/supplier', debtor.supplier.id, 'view']">{{ debtor.supplier.address }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/debtor', debtor.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

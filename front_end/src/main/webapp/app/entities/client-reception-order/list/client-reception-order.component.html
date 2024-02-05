@@ -1,0 +1,195 @@
+<div>
+  <h2 id="page-heading" data-cy="ClientReceptionOrderHeading">
+    <span jhiTranslate="printingApp.clientReceptionOrder.home.title">Client Reception Orders</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="printingApp.clientReceptionOrder.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-client-reception-order"
+        [routerLink]="['/client-reception-order/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="printingApp.clientReceptionOrder.home.createLabel"> Create a new Client Reception Order </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="clientReceptionOrders?.length === 0">
+    <span jhiTranslate="printingApp.clientReceptionOrder.home.notFound">No Client Reception Orders found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="clientReceptionOrders && clientReceptionOrders.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <!--<th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>-->
+          <th scope="col" jhiSortBy="orderNumber">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.clientReceptionOrder.orderNumber">Order Number</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="divisionId">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.clientReceptionOrder.divisionId">Division Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="receivedOn">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.clientReceptionOrder.receivedOn">Received On</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="receptionMode">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.clientReceptionOrder.receptionMode">Reception Mode</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="jobDescription">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.clientReceptionOrder.jobDescription">Job Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="totalCost">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.clientReceptionOrder.totalCost">Total Cost</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="totalJobCards">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.clientReceptionOrder.totalJobCards">Total Job Cards</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="deliveryDate">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.clientReceptionOrder.deliveryDate">Delivery Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="assignedToDivisionNames">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.clientReceptionOrder.assignedToDivisionNames">Assigned To Division Names</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="assignedToEmployeeNames">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.clientReceptionOrder.assignedToEmployeeNames">Assigned To Employee Names</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="orderingStatus">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.clientReceptionOrder.orderingStatus">Ordering Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="invoicingStatus">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.clientReceptionOrder.invoicingStatus">Invoicing Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="client.id">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.clientReceptionOrder.client">Client</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="assignedToEmployee.id">
+            <div class="d-flex">
+              <span jhiTranslate="printingApp.clientReceptionOrder.assignedToEmployee">Assigned To Employee</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let clientReceptionOrder of clientReceptionOrders; trackBy: trackId" data-cy="entityTable">
+        <!--  <td>
+            <a [routerLink]="['/client-reception-order', clientReceptionOrder.id, 'view']">{{ clientReceptionOrder.id }}</a>
+          </td>-->
+          <td> <a [routerLink]="['/client-reception-order', clientReceptionOrder.id, 'view']">{{ clientReceptionOrder.orderNumber }}</a></td>
+          <td>{{ clientReceptionOrder.divisionId }}</td>
+          <td>{{ clientReceptionOrder.receivedOn | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'printingApp.ClientReceptionModes.' + clientReceptionOrder.receptionMode }}">
+            {{ clientReceptionOrder.receptionMode }}
+          </td>
+          <td>{{ clientReceptionOrder.jobDescription }}</td>
+          <td>{{ clientReceptionOrder.totalCost }}</td>
+          <td>{{ clientReceptionOrder.totalJobCards }}</td>
+          <td>{{ clientReceptionOrder.deliveryDate | formatMediumDatetime }}</td>
+          <td>{{ clientReceptionOrder.assignedToDivisionNames }}</td>
+          <td>{{ clientReceptionOrder.assignedToEmployeeNames }}</td>
+          <td jhiTranslate="{{ 'printingApp.OrderStatuses.' + clientReceptionOrder.orderingStatus }}">
+            {{ clientReceptionOrder.orderingStatus }}
+          </td>
+          <td jhiTranslate="{{ 'printingApp.InvoicingStatuses.' + clientReceptionOrder.invoicingStatus }}">
+            {{ clientReceptionOrder.invoicingStatus }}
+          </td>
+          <td>
+            <div *ngIf="clientReceptionOrder.client">
+              <a [routerLink]="['/client', clientReceptionOrder.client.id, 'view']">{{ clientReceptionOrder.client.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="clientReceptionOrder.assignedToEmployee">
+              <a [routerLink]="['/employee', clientReceptionOrder.assignedToEmployee.id, 'view']">{{
+                clientReceptionOrder.assignedToEmployee.id
+              }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/client-reception-order', clientReceptionOrder.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/client-reception-order', clientReceptionOrder.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(clientReceptionOrder)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="jobCardAssignment">
+      <h2 data-cy="jobCardAssignmentDetailsHeading">
+        <span jhiTranslate="printingApp.jobCardAssignment.detail.title">Job Card Assignment</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+       <!-- <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ jobCardAssignment.id }}</span>
+        </dd>-->
+        <dt><span jhiTranslate="printingApp.jobCardAssignment.assignedToId">Assigned To Id</span></dt>
+        <dd>
+          <span>{{ jobCardAssignment.assignedToId }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.jobCardAssignment.assignedNames">Assigned Names</span></dt>
+        <dd>
+          <span>{{ jobCardAssignment.assignedNames }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.jobCardAssignment.description">Description</span></dt>
+        <dd>
+          <span>{{ jobCardAssignment.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.jobCardAssignment.assignmentMode">Assignment Mode</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.JobCardAssignmentModes.' + jobCardAssignment.assignmentMode }}">{{
+            jobCardAssignment.assignmentMode
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.jobCardAssignment.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.JobCardAssignmentStatuses.' + jobCardAssignment.status }}">{{
+            jobCardAssignment.status
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.jobCardAssignment.jobCard">Job Card</span></dt>
+        <dd>
+          <div *ngIf="jobCardAssignment.jobCard">
+            <a [routerLink]="['/job-card', jobCardAssignment.jobCard.id, 'view']">{{ jobCardAssignment.jobCard.description }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/job-card-assignment', jobCardAssignment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

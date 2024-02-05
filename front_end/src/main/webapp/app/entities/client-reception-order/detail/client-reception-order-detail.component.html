@@ -1,0 +1,107 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="clientReceptionOrder">
+      <h2 data-cy="clientReceptionOrderDetailsHeading">
+        <span jhiTranslate="printingApp.clientReceptionOrder.detail.title">Client Reception Order</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <!--<dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ clientReceptionOrder.id }}</span>
+        </dd>-->
+        <dt><span jhiTranslate="printingApp.clientReceptionOrder.orderNumber">Order Number</span></dt>
+        <dd>
+          <span>{{ clientReceptionOrder.orderNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.clientReceptionOrder.divisionId">Division Id</span></dt>
+        <dd>
+          <span>{{ clientReceptionOrder.divisionId }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.clientReceptionOrder.receivedOn">Received On</span></dt>
+        <dd>
+          <span>{{ clientReceptionOrder.receivedOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.clientReceptionOrder.receptionMode">Reception Mode</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.ClientReceptionModes.' + clientReceptionOrder.receptionMode }}">{{
+            clientReceptionOrder.receptionMode
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.clientReceptionOrder.jobDescription">Job Description</span></dt>
+        <dd>
+          <span>{{ clientReceptionOrder.jobDescription }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.clientReceptionOrder.totalCost">Total Cost</span></dt>
+        <dd>
+          <span>{{ clientReceptionOrder.totalCost }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.clientReceptionOrder.totalJobCards">Total Job Cards</span></dt>
+        <dd>
+          <span>{{ clientReceptionOrder.totalJobCards }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.clientReceptionOrder.deliveryDate">Delivery Date</span></dt>
+        <dd>
+          <span>{{ clientReceptionOrder.deliveryDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.clientReceptionOrder.assignedToDivisionNames">Assigned To Division Names</span></dt>
+        <dd>
+          <span>{{ clientReceptionOrder.assignedToDivisionNames }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.clientReceptionOrder.assignedToEmployeeNames">Assigned To Employee Names</span></dt>
+        <dd>
+          <span>{{ clientReceptionOrder.assignedToEmployeeNames }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.clientReceptionOrder.orderingStatus">Ordering Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.OrderStatuses.' + clientReceptionOrder.orderingStatus }}">{{
+            clientReceptionOrder.orderingStatus
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.clientReceptionOrder.invoicingStatus">Invoicing Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.InvoicingStatuses.' + clientReceptionOrder.invoicingStatus }}">{{
+            clientReceptionOrder.invoicingStatus
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.clientReceptionOrder.client">Client</span></dt>
+        <dd>
+          <div *ngIf="clientReceptionOrder.client">
+            <a [routerLink]="['/client', clientReceptionOrder.client.id, 'view']">{{ clientReceptionOrder.client.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="printingApp.clientReceptionOrder.assignedToEmployee">Assigned To Employee</span></dt>
+        <dd>
+          <div *ngIf="clientReceptionOrder.assignedToEmployee">
+            <a [routerLink]="['/employee', clientReceptionOrder.assignedToEmployee.id, 'view']">{{
+              clientReceptionOrder.assignedToEmployee.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/client-reception-order', clientReceptionOrder.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+    <table border="2" class="table table-striped" aria-describedby="page-heading" ><tr><td>
+
+
+      <h2>Job Cards</h2>
+      <ul>
+        <!--<li ng-repeat="jobCard in clientReceptionOrder.jobCards">{{ jobCard.description }}</li>-->
+      </ul>
+
+      </td></tr></table>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+{
+  "home": {
+    "title": "Welcome,to our mini-enterprise management software!",
+    "subtitle": "Home page content will go bellow here",
+    "system":{
+      "name": "NTADIDC"
+    },
+    "logged": {
+      "message": "You are logged in as \"{{username}}\"."
+    },
+    "question": "For frequently asked questions",
+    "link": {
+      "homepage": "Company website",
+      "stackoverflow": "Our stackover folow page",
+      "bugtracker": "Issues and bugs reporting site",
+      "chat": "Our chatting boot",
+      "follow": "follow @ntadevelopers on Twitter"
+    },
+    "like": "If you like our services then give us feedback,like our social media pages here",
+    "github": "NTA Developers LTD"
+  }
+}

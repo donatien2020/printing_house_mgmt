@@ -1,0 +1,10 @@
+{
+  "printingApp": {
+    "PaymentPeriods": {
+      "null": "",
+      "HOURLY": "HOURLY",
+      "DAILY": "DAILY",
+      "MONTHLY": "MONTHLY"
+    }
+  }
+}

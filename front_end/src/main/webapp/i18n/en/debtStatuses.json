@@ -1,0 +1,11 @@
+{
+  "printingApp": {
+    "DebtStatuses": {
+      "null": "",
+      "REQUESTED": "REQUESTED",
+      "RECEIVED": "RECEIVED",
+      "PAID": "PAID",
+      "CANCELED": "CANCELED"
+    }
+  }
+}

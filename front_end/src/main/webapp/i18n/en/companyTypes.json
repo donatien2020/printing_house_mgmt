@@ -1,0 +1,10 @@
+{
+  "printingApp": {
+    "CompanyTypes": {
+      "null": "",
+      "PROVIDER": "PROVIDER",
+      "RESELLER": "RESELLER",
+      "CLIENT": "CLIENT"
+    }
+  }
+}

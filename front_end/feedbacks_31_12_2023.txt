@@ -1,0 +1,18 @@
+Production:
+Job Card: Details cleint,Company,....
+
+Order: Associate Order with attachment like locap urchase order
+
+Reception Mode: E_MAIL,PHONE CALL,PERSONAL
+
+Reception Order: Upon Creation force Job Cards Creation by Reciption
+Add payment Mode on the client reciptionoder:(MOBILE_MONEY, BANK_TRANSFER, CHECK_DEPOSIT, CASH,CREDIT)
+
+Add  a new to the order to request LPO,then once order status changed STARTED log notification for LPO Request
+
+Add new Notification type as LOG(LPO REQUEST,New Orders/Jobs Cars)
+
+Notifictaions: New Orders/Jobs Cars(PRODUCTION,ACCOUNTANT,CASHIER,RECOVERY==>When Credit),ORDER COMPLETION==DELIVERY WAITING
+
+
+

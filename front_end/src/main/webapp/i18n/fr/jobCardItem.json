@@ -1,0 +1,28 @@
+{
+  "printingApp": {
+    "jobCardItem": {
+      "home": {
+        "title": "JobCardItems",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Job Card Item",
+        "createOrEditLabel": "Créer ou éditer un Job Card Item",
+        "notFound": "Aucun Job Card Item trouvé"
+      },
+      "created": "Un nouveau Job Card Item a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Job Card Item avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Job Card Item avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Job Card Item {{ id }} ?"
+      },
+      "detail": {
+        "title": "Job Card Item"
+      },
+      "id": "ID",
+      "quantity": "Quantity",
+      "unitPrice": "Unit Price",
+      "status": "Status",
+      "card": "Card",
+      "product": "Product"
+    }
+  }
+}

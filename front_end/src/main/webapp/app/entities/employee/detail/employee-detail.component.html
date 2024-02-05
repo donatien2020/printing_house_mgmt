@@ -1,0 +1,88 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="employee">
+      <h2 data-cy="employeeDetailsHeading"><span jhiTranslate="printingApp.employee.detail.title">Employee</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <!--<dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ employee.id }}</span>
+        </dd>-->
+        <dt><span jhiTranslate="printingApp.employee.empNumber">Emp Number</span></dt>
+        <dd>
+          <span>{{ employee.empNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.employee.description">Description</span></dt>
+        <dd>
+          <span>{{ employee.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.employee.phoneNumber">Phone Number</span></dt>
+        <dd>
+          <span>{{ employee.phoneNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.employee.email">Email</span></dt>
+        <dd>
+          <span>{{ employee.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.employee.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.EmploymentStatuses.' + employee.status }}">{{ employee.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.employee.startedOn">Started On</span></dt>
+        <dd>
+          <span>{{ employee.startedOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.employee.terminatedOn">Terminated On</span></dt>
+        <dd>
+          <span>{{ employee.terminatedOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.employee.empType">Emp Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.EmploymentTypes.' + employee.empType }}">{{ employee.empType }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.employee.basePayment">Base Payment</span></dt>
+        <dd>
+          <span>{{ employee.basePayment }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.employee.netPayment">Net Payment</span></dt>
+        <dd>
+          <span>{{ employee.netPayment }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.employee.grossPayment">Gross Payment</span></dt>
+        <dd>
+          <span>{{ employee.grossPayment }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.employee.paymentPeriod">Payment Period</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.PaymentPeriods.' + employee.paymentPeriod }}">{{ employee.paymentPeriod }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.employee.division">Division</span></dt>
+        <dd>
+          <div *ngIf="employee.division">
+            <a [routerLink]="['/division', employee.division.id, 'view']">{{ employee.division.name }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="printingApp.employee.person">Person</span></dt>
+        <dd>
+          <div *ngIf="employee.person">
+            <a [routerLink]="['/person', employee.person.id, 'view']">{{ employee.person.firstName }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/employee', employee.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

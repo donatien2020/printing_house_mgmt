@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="financialClientEngagement">
+      <h2 data-cy="financialClientEngagementDetailsHeading">
+        <span jhiTranslate="printingApp.financialClientEngagement.detail.title">Financial Client Engagement</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ financialClientEngagement.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.financialClientEngagement.userId">User Id</span></dt>
+        <dd>
+          <span>{{ financialClientEngagement.userId }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.financialClientEngagement.clientId">Client Id</span></dt>
+        <dd>
+          <span>{{ financialClientEngagement.clientId }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.financialClientEngagement.clientNames">Client Names</span></dt>
+        <dd>
+          <span>{{ financialClientEngagement.clientNames }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.financialClientEngagement.discussionSummary">Discussion Summary</span></dt>
+        <dd>
+          <span>{{ financialClientEngagement.discussionSummary }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.financialClientEngagement.reason">Reason</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'printingApp.EngagementReasons.' + financialClientEngagement.reason }}">{{
+            financialClientEngagement.reason
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.financialClientEngagement.conclusion">Conclusion</span></dt>
+        <dd>
+          <span>{{ financialClientEngagement.conclusion }}</span>
+        </dd>
+        <dt><span jhiTranslate="printingApp.financialClientEngagement.contractId">Contract Id</span></dt>
+        <dd>
+          <span>{{ financialClientEngagement.contractId }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/financial-client-engagement', financialClientEngagement.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
