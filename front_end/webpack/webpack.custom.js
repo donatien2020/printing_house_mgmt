@@ -63,7 +63,7 @@ module.exports = async (config, options, targetOptions) => {
           },
           /*
           ghostMode: { // uncomment this part to disable BrowserSync ghostMode; https://github.com/jhipster/generator-jhipster/issues/11116
-            clicks: false,
+            clicks: false,x
             location: false,
             forms: false,
             scroll: false,
@@ -92,16 +92,16 @@ module.exports = async (config, options, targetOptions) => {
     {
       // https://github.com/swagger-api/swagger-ui/blob/v4.6.1/swagger-ui-dist-package/README.md
       context: require('swagger-ui-dist').getAbsoluteFSPath(),
-      from: '*.{js,css,html,png}',
+      from: '*.{js,css,html,png}',   
       to: 'swagger-ui/',
       globOptions: { ignore: ['**/index.html'] },
     },
     {
-      from: require.resolve('axios/dist/axios.min.js'),
+      from: require.resolve('../node_modules/axios/dist/axios.min.js'),
       to: 'swagger-ui/',
     },
     { from: './src/main/webapp/swagger-ui/', to: 'swagger-ui/' },
-    // jhipster-needle-add-assets-to-webpack - JHipster will add/remove third-party resources in this array
+    // jhipster-needle-add-assets-to-webpackp - JHipster will add/remove third-party resources in this array
   ];
 
   if (patterns.length > 0) {
